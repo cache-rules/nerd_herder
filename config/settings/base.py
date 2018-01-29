@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'nerd_herder',
     'nerd_herder.speakers',
+    'nerd_herder.venues',
 ]
 
 MIDDLEWARE = [
