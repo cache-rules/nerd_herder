@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'nerd_herder',
+    'nerd_herder.speakers',
 ]
 
 MIDDLEWARE = [
