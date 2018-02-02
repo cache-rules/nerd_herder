@@ -1,6 +1,6 @@
 from django.db import models
 
-from nerd_herder.models import UUIDModel, TimeStampedModel
+from nerd_herder.models import UUIDModel, TimeStampedModel, ContactModel
 from nerd_herder.speakers.models import Talk
 from nerd_herder.venues.models import Venue, VenueContact
 
@@ -9,9 +9,7 @@ class Sponsor(UUIDModel, TimeStampedModel):
     name = models.TextField()
 
 
-class SponsorContact(UUIDModel, TimeStampedModel):
-    name = models.TextField()
-    email = models.EmailField(blank=False, null=False)
+class SponsorContact(UUIDModel, TimeStampedModel, ContactModel):
     sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE, related_name='contacts')
 
 

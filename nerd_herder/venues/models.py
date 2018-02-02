@@ -1,6 +1,6 @@
 from django.db import models
 
-from nerd_herder.models import UUIDModel, TimeStampedModel
+from nerd_herder.models import UUIDModel, TimeStampedModel, ContactModel
 
 
 class Venue(UUIDModel, TimeStampedModel):
@@ -12,8 +12,6 @@ class Venue(UUIDModel, TimeStampedModel):
     capacity = models.IntegerField()
 
 
-class VenueContact(UUIDModel, TimeStampedModel):
-    name = models.TextField(blank=False, null=False)
-    email = models.EmailField(blank=False, null=False)
-    job_title = models.TextField()
+class VenueContact(UUIDModel, TimeStampedModel, ContactModel):
+    job_title = models.TextField(null=True, blank=True)
     venue = models.ForeignKey(Venue, on_delete=models.CASCADE)

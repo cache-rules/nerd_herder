@@ -23,3 +23,11 @@ class UUIDModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ContactModel(models.Model):
+    name = models.TextField()
+    email = models.EmailField(blank=False, null=False)
+
+    class Meta:
+        abstract = True
