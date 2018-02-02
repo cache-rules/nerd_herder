@@ -22,7 +22,7 @@ class Event(UUIDModel, TimeStampedModel):
     primary_contact = models.ForeignKey(VenueContact, blank=True, null=True,
                                         on_delete=models.SET_NULL)
     sponsors = models.ManyToManyField(Sponsor, through='EventSponsorship')
-    talks = models.ManyToManyField(Talk)
+    talks = models.ManyToManyField(Talk, through='TalkInvitation')
 
 
 class EventSponsorship(UUIDModel, TimeStampedModel):
@@ -32,3 +32,10 @@ class EventSponsorship(UUIDModel, TimeStampedModel):
     primary_contact = models.ForeignKey(SponsorContact, blank=True, null=True,
                                         on_delete=models.SET_NULL)
     description = models.TextField()
+
+
+class TalkInvitation(UUIDModel, TimeStampedModel):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
+    invited_on = models.DateTimeField(auto_now_add=True)
+    accepted_on = models.DateTimeField(blank=True, null=True)
