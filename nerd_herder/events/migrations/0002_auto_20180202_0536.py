@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 'abstract': False,
             },
         ),
-        migrations.AlterField(
+        migrations.AddField(
             model_name='event',
             name='talks',
             field=models.ManyToManyField(through='events.TalkInvitation', to='speakers.Talk'),

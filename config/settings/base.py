@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'nerd_herder',
     'nerd_herder.speakers',
     'nerd_herder.venues',
+    'nerd_herder.companies',
     'nerd_herder.events',
 ]
 

@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from nerd_herder.events.models import Sponsor, SponsorContact, Event, EventSponsorship
+from nerd_herder.events.models import Event, Sponsorship, VenueSponsorship, TalkInvitation
 
-admin.site.register(Sponsor)
-admin.site.register(SponsorContact)
 admin.site.register(Event)
-admin.site.register(EventSponsorship)
+admin.site.register(Sponsorship)
+admin.site.register(VenueSponsorship)
+admin.site.register(TalkInvitation)

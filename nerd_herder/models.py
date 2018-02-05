@@ -26,7 +26,7 @@ class UUIDModel(models.Model):
 
 
 class ContactModel(models.Model):
-    name = models.TextField()
+    name = models.CharField(max_length=128)
     email = models.EmailField(blank=False, null=False)
 
     class Meta:

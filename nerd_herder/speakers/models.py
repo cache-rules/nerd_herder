@@ -4,7 +4,7 @@ from nerd_herder.models import UUIDModel, TimeStampedModel
 
 
 class Speaker(UUIDModel, TimeStampedModel):
-    name = models.TextField()
+    name = models.CharField(max_length=128)
     email = models.EmailField(unique=True, null=False, blank=False)
     email_confirmed = models.BooleanField(default=False)
     bio = models.TextField(null=True, blank=True)
@@ -18,8 +18,8 @@ class Talk(UUIDModel, TimeStampedModel):
         ('lightning', 'Lightning Talk (5-10 minutes)')
     )
 
-    title = models.TextField()
+    title = models.CharField(max_length=128)
     description = models.TextField()
-    talk_type = models.TextField(choices=TALK_TYPES)
+    talk_type = models.CharField(max_length=64, choices=TALK_TYPES)
     q_and_a = models.BooleanField(default=False)
     speakers = models.ManyToManyField(Speaker)
