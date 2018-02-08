@@ -53,3 +53,4 @@ class TalkInvitation(UUIDModel, TimeStampedModel):
     talk = models.ForeignKey(Talk, on_delete=models.CASCADE)
     invited_on = models.DateTimeField(auto_now_add=True)
     accepted_on = models.DateTimeField(blank=True, null=True)
+    declined_on = models.DateTimeField(blank=True, null=True)
