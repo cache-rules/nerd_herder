@@ -6,9 +6,15 @@ from nerd_herder.models import UUIDModel, TimeStampedModel, ContactModel
 class Company(UUIDModel, TimeStampedModel):
     name = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.name
+
 
 class CompanyContact(UUIDModel, TimeStampedModel, ContactModel):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Venue(UUIDModel, TimeStampedModel):
@@ -25,3 +31,6 @@ class Venue(UUIDModel, TimeStampedModel):
     address = models.TextField()
     notes = models.TextField(blank=True)
     capacity = models.IntegerField()
+
+    def __str__(self):
+        return self.name

@@ -12,6 +12,9 @@ class Event(UUIDModel, TimeStampedModel):
     rsvp_max = models.IntegerField()
     talks = models.ManyToManyField(Talk, through='TalkInvitation')
 
+    def __str__(self):
+        return self.name
+
 
 class Sponsorship(models.Model):
     event = models.ForeignKey(Event, null=True, blank=True, on_delete=models.SET_NULL)
