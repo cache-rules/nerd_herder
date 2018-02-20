@@ -6,5 +6,14 @@
 </head>
 <body>
     <h1>Welcome to Nerd Herder</h1>
+    <p>Nerd Herder allows you to sign in and register an upcoming talk at a PuPPy meetup.</p>
+    <form action="/signin" method="post">
+    <label for="user_name">User name: </label>
+    <input id="user_name" type="text" name="user_name" value="{{ current_user_name }}">
+    <label for="password">Password: </label>
+    <input id="password" type="text" name="password" value="{{ current_password }}"
+    <input type="submit" value="OK">
+</form>
+
 </body>
 </html>
