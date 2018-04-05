@@ -1,0 +1,19 @@
+<DOCTYPE html>
+<html>
+<head>
+<title>Talk Proposal</title>
+</head>
+<body>
+
+<form method="post">
+  <h2>Speaker information</h2>
+      {% csrf_token %}
+      {{ speaker.as_p }}
+    <h3>Talk information</h3>
+      {{ talk.as_p }}
+
+    <p><button type="submit">Submit</button></p>
+  </form>
+</form>
+</body>
+</html>

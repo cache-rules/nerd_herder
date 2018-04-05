@@ -15,13 +15,21 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
+from django.conf.urls import include, url
 
 from nerd_herder.views import index
+from nerd_herder.speakers import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('talk_detail', views.talk_form, name='talk_detail'),
+    path('talk_confirmation/<uuid:talk_id>/', views.talk_confirmation, name='talk_confirmation')
+    #path('', index, name='index'),
+    #path('new_speaker', views.talk_form, name='new_speaker'),
+    #path('new_talk', views.new_talk, name='new_talk'),
+    #path('success', views.success, name='success'),
 ]
 
 if settings.DEBUG:

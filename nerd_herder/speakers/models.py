@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import inlineformset_factory, ModelForm
 
 from nerd_herder.models import UUIDModel, TimeStampedModel
 
@@ -29,3 +30,14 @@ class Talk(UUIDModel, TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+class SpeakerForm(ModelForm):
+    class Meta:
+        model  = Speaker
+        fields = ['name', 'email', 'email_confirmed', 'bio', 'photo']
+
+
+class TalkForm(ModelForm):
+    class Meta:
+        model = Talk
+        fields = ['title', 'description', 'talk_type', 'q_and_a', 'speakers']
