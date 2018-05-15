@@ -17,11 +17,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
-from nerd_herder.views import index
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
 ]
 
 if settings.DEBUG:
