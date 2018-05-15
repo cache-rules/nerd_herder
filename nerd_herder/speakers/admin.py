@@ -1,7 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
-from nerd_herder.speakers.models import Speaker, Talk
+from nerd_herder.speakers.models import Speaker
 
 admin.site.register(Speaker)
-admin.site.register(Talk)

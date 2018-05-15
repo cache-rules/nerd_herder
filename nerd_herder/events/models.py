@@ -2,11 +2,11 @@ from django.db import models
 
 from nerd_herder.companies.models import Company, CompanyContact, Venue
 from nerd_herder.models import UUIDModel, TimeStampedModel, ContactModel
-from nerd_herder.speakers.models import Talk
+from nerd_herder.talks.models import Talk
 
 
 class Event(UUIDModel, TimeStampedModel):
-    name = models.TextField()
+    name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
     date_scheduled = models.DateTimeField(blank=True, null=True)
     rsvp_max = models.IntegerField()

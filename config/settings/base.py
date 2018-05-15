@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'nerd_herder',
     'nerd_herder.speakers',
+    'nerd_herder.talks',
     'nerd_herder.companies',
     'nerd_herder.events',
 ]
