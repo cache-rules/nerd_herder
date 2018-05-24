@@ -1,0 +1,19 @@
+.radio-text {
+  margin-left: 0.5em;
+}
+.radio {
+  margin-bottom: 0.5em;
+}
+.field:not(:last-child) {
+  /* TODO: See if we can override this via sass config */
+  margin-bottom: 1.10rem;
+}
+.radio-group.is-danger {
+  border: 1px solid red;
+}
+.radio.is-danger {
+  border-bottom: 1px solid red;
+}
+.radio {
+  padding-bottom: 0.2em;
+}

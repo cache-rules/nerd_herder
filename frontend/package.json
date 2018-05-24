@@ -1,0 +1,28 @@
+{
+  "name": "nerd-herder-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4"
+  },
+  "devDependencies": {
+    "prettier": "^1.12.1"
+  },
+  "proxy": "http://0.0.0.0:9000",
+  "homepage": "https://pspython.com/app/",
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}

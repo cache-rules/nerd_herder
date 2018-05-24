@@ -1,0 +1,19 @@
+.navbar {
+  padding: 1em 0;
+}
+.nav-title,
+.nav-icon {
+  color: #FFFFFF;
+}
+.nav-icon {
+  margin: 0.5em 1em 0 0;
+}
+.nav-link {
+  display: flex;
+}
+.nav--fixed {
+  background-image: linear-gradient(#005b9a 5%, #0081ca 95%);
+}
+.nav--transparent {
+  background: transparent;
+}
