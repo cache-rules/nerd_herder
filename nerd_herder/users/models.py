@@ -52,7 +52,13 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def get_full_name(self):
+        if self.nickname is None or self.nickname == '':
+            return self.email
+
         return self.name.strip()
 
     def get_short_name(self):
+        if self.nickname is None or self.nickname == '':
+            return self.email
+
         return self.nickname.strip()
