@@ -1,0 +1,35 @@
+version: '3'
+services:
+  postgres:
+    env_file:
+      - postgres.env
+    volumes:
+      - '/var/lib/postgresql/data:/var/lib/postgresql/data/'
+  redis:
+    image: 'redis:alpine'
+  nerd_herder:
+    image: 'path/to/nerd_herder/gitlab/image'
+    command: python manage.py runserver 0.0.0.0:8080
+    env_file:
+      - nerd_herder.env
+    links:
+      - redis
+      - postgres
+  reverse-proxy:
+    # TODO: make an image for caddy that uses the nerd_herder image as an intermediary to copy
+    # static assets from. Should also copy static assets from frontend build.
+    # nerd_herder static assets are stored in /usr/src/nerd_herder/static after collectstatic runs.
+    image: abiosoft/caddy:0.11.0-no-stats
+    restart: always
+    env_file:
+      - caddy.env
+    links:
+      - nerd_herder
+    depends_on:
+      - nerd_herder
+    volumes:
+      - '/var/lib/caddy:/root/.caddy'
+      - './Caddyfile:/etc/Caddyfile'
+    ports:
+      - '80:80'
+      - '443:443'

@@ -1,0 +1,18 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=nerd_herder
+      - POSTGRES_DATABASE=nerd_herder
+      - PGDATA=/var/lib/postgresql/data/pgdata
+  redis:
+    image: redis:alpine
+    restart: always
+  nerd_herder:
+    build: .
+    restart: always
+    links:
+      - redis
+      - postgres

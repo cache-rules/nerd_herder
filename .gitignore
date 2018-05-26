@@ -103,6 +103,7 @@ ENV/
 .idea/
 
 config/settings/local.py
+caddy.env
 nerd_herder.env
 postgres.env
 .docker-data/

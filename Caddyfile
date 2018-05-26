@@ -1,0 +1,8 @@
+pspython.com {
+    tls {$TLS_EMAIL}
+    gzip
+    root /var/www/nerd_herder/static
+    proxy / nerd_herder:8080 {
+        transparent
+    }
+}

@@ -1,0 +1,8 @@
+localhost:8080 {
+    tls self_signed
+    gzip
+    root /var/www/nerd_herder/static
+    proxy / nerd_herder:8080 {
+        transparent
+    }
+}
