@@ -25,7 +25,7 @@ services:
       - redis
       - postgres
   # TODO: Add service for react build. Probably don't need caddy that way though.
-  reverse-proxy:
+  reverse_proxy:
     image: abiosoft/caddy:0.11.0-no-stats
     restart: always
     depends_on:
