@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+
+        {%  if title %}
+            <title>{{ title }}</title>
+        {% else %}
+            <title>PuPPy</title>
+        {% endif %}
+
+    {% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    <style type="text/css">
+        /*
+        TODO: find a way to put this CSS in a shared CSS file that can be used by our SPA and
+        by our Django templates.
+         */
+        .main {
+            margin: 5em 0;
+        }
+        .navbar {
+            padding: 0.25em 0;
+        }
+        .nav-title,
+        .nav-icon {
+            color: #FFFFFF;
+        }
+        .nav-icon {
+            margin: 0.5em 1em 0 0;
+        }
+        .nav-link {
+            display: flex;
+        }
+        .nav--fixed {
+            background-image: linear-gradient(#005b9a 5%, #0081ca 95%);
+        }
+    </style>
+</head>
+<body>
+<nav class="nav--fixed navbar is-fixed-top">
+    <div class="container">
+        <div class="navbar-brand">
+            <div class="navbar-item">
+                <a class="nav-link" href="/">
+                    <div class="nav-icon">
+                        <i class="fab fa-python fa-3x"></i>
+                    </div>
+
+                    <div class="nav-title">
+                        <h3 class="is-size-4 has-text-weight-bold">PuPPy</h3>
+                        <p class="is-size-7 is-uppercase">Puget Sound Programming Python</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="main section">
+    {% block content %}{% endblock %}
+</section>
+
+{% block scripts %}
+    {# Put script tags in this block. Don't forget to use block.super #}
+{%  endblock %}
+</body>
+</html>
