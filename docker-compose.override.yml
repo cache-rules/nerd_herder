@@ -14,9 +14,10 @@ services:
     environment:
       - POSTGRES_USER=nerd_herder
       - POSTGRES_PASSWORD=nerd_herder
+      - DEBUG=TRUE
     volumes:
-      - ./nerd_herder:/usr/src/nerd_herder/nerd_herder
-      - ./config/:/usr/src/config
+      - './nerd_herder/:/usr/src/nerd_herder/nerd_herder/'
+      - './config/:/usr/src/nerd_herder/config/'
     depends_on:
       - redis
       - postgres

@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = False
+DEBUG = os.environ.get('DEBUG') == 'TRUE'
 ALLOWED_HOSTS = ['*']
 
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', 'postgres')
