@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Nerd Herder</title>
-</head>
-<body>
-    <h1>Welcome to Nerd Herder</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="columns">
+            <div class="column is-half content">
+                <p class="has-text-danger">Dev Server Only - You should not normally see this page</p>
+
+                <ul>
+                    <li>
+                        <a href="/code-of-conduct">Code of Conduct</a>
+                    </li>
+                    <li>
+                        <a href="/code-of-conduct-reporting-guide">
+                            Code of Conduct - Reporting Guide
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/code-of-conduct-response-playbook">
+                            Code of Conduct - Response Playbook
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
