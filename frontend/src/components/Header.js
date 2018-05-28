@@ -18,12 +18,12 @@ class Header extends PureComponent {
             <div className="navbar-item">
               <Link className="nav-link" to="/">
                 <div className="nav-icon">
-                  <i className="fab fa-python fa-4x" />
+                  <i className="fab fa-python fa-3x" />
                 </div>
 
                 <div className="nav-title">
-                  <h3 className="is-size-3 has-text-weight-bold">PuPPy</h3>
-                  <p className="is-size-6 is-uppercase">Puget Sound Programming Python</p>
+                  <h3 className="is-size-4 has-text-weight-bold">PuPPy</h3>
+                  <p className="is-size-7 is-uppercase">Puget Sound Programming Python</p>
                 </div>
               </Link>
             </div>
