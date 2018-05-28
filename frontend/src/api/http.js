@@ -26,7 +26,7 @@ export function request(url, method, body = null, queryParams = {}, headers = {}
     },
   };
 
-  if (body !== null && headers['content-type'] === 'application/json') {
+  if (body !== null && requestConfig.headers['content-type'] === 'application/json') {
     requestConfig.body = JSON.stringify(body);
   } else {
     requestConfig.body = body;
