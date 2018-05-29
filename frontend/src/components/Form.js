@@ -6,10 +6,14 @@ const getId = () => {
   return `${inputId++}`;
 };
 
-const Option = props => <option key={props.value} value={props.value}>{props.label}</option>;
+const Option = props => (
+  <option key={props.value} value={props.value}>
+    {props.label}
+  </option>
+);
 
 export const Select = props => {
-  const { id, value, onChange, error } = props;
+  const { id, name, value, onChange, error, disabled } = props;
   const options = props.options.map(Option);
   let errorClass = '';
 
@@ -19,7 +23,7 @@ export const Select = props => {
 
   return (
     <div className={`select ${errorClass} is-full-width`}>
-      <select id={id} value={value} onChange={onChange}>
+      <select id={id} name={name} value={value} disabled={disabled} onChange={onChange}>
         {options}
       </select>
     </div>
@@ -28,7 +32,7 @@ export const Select = props => {
 
 export const RadioButton = props => {
   const id = `${inputId++}`;
-  const { name, value, label, checked, onChange, error } = props;
+  const { name, value, label, checked, onChange, error, disabled } = props;
   let errorClass = '';
 
   if (error) {
@@ -37,14 +41,22 @@ export const RadioButton = props => {
 
   return (
     <label className={`radio ${errorClass}`} htmlFor={id}>
-      <input type="radio" id={id} name={name} value={value} checked={checked} onChange={onChange} />
+      <input
+        type="radio"
+        id={id}
+        name={name}
+        value={value}
+        checked={checked}
+        disabled={disabled}
+        onChange={onChange}
+      />
       <span className="radio-text">{label}</span>
     </label>
   );
 };
 
 export const RadioGroup = props => {
-  const { value, onChange, name, error } = props;
+  const { value, onChange, name, error, disabled } = props;
   const choices = props.choices.map(choice => {
     const checked = value === choice.value;
     return (
@@ -54,6 +66,7 @@ export const RadioGroup = props => {
           error={error}
           name={name}
           checked={checked}
+          disabled={disabled}
           onChange={onChange}
         />
       </div>
@@ -72,13 +85,13 @@ export const Input = props => {
   const id = getId();
   const type = props.type;
   const onChange = e => {
-    let value = e.target.value;
+    let { name, value } = e.target;
 
     if (type === 'bool') {
       value = value === 'true';
     }
 
-    props.onChange(value);
+    props.onChange({ [name]: value });
   };
   let input = null;
   let errorClass = '';
@@ -92,18 +105,30 @@ export const Input = props => {
       <textarea
         id={id}
         className={`textarea ${errorClass}`}
+        name={props.name}
         value={props.value}
+        disabled={props.disabled}
         onChange={onChange}
       />
     );
   } else if (type === 'bool') {
-    input = <BoolInput value={props.value} error={props.error} onChange={onChange} />;
+    input = (
+      <BoolInput
+        name={props.name}
+        value={props.value}
+        error={props.error}
+        disabled={props.disabled}
+        onChange={onChange}
+      />
+    );
   } else if (type === 'radio-group') {
     input = (
       <RadioGroup
+        name={props.name}
         value={props.value}
         error={props.error}
         choices={props.choices}
+        disabled={props.disabled}
         onChange={onChange}
       />
     );
@@ -111,9 +136,11 @@ export const Input = props => {
     input = (
       <Select
         id={id}
+        name={props.name}
         value={props.value}
         options={props.options}
         error={props.error}
+        disabled={props.disabled}
         onChange={onChange}
       />
     );
@@ -122,8 +149,10 @@ export const Input = props => {
       <input
         id={id}
         className={`input ${errorClass}`}
+        name={props.name}
         type={props.type}
         value={props.value}
+        disabled={props.disabled}
         onChange={onChange}
       />
     );
@@ -141,7 +170,7 @@ export const Input = props => {
 };
 
 export const Form = props => {
-  const { saveText = 'Save', cancelText = 'Cancel' } = props;
+  const { saveText = 'Save', cancelText = 'Cancel', saving = false } = props;
 
   return (
     <form className="form">
@@ -149,12 +178,22 @@ export const Form = props => {
 
       <div className="field is-grouped is-grouped-right">
         <div className="control">
-          <button className="button is-light" type="button" onClick={props.cancel}>
+          <button
+            className="button is-light"
+            type="button"
+            onClick={props.cancel}
+            disabled={saving}
+          >
             {cancelText}
           </button>
         </div>
         <div className="control">
-          <button className="button is-primary" type="button" onClick={props.save}>
+          <button
+            className="button is-primary"
+            type="button"
+            onClick={props.save}
+            disabled={saving}
+          >
             {saveText}
           </button>
         </div>

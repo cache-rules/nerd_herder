@@ -2,21 +2,127 @@ import React, { Component } from 'react';
 import { post } from '../api/http';
 import TalkForm from '../components/TalkForm';
 
+const defaultTalk = {
+  email: '',
+  name: '',
+  title: '',
+  description: '',
+  talkType: '',
+};
+
+const defaultErrors = {
+  name: null,
+  email: null,
+  title: null,
+  description: null,
+  talkType: null,
+};
+
 class NewTalkView extends Component {
   constructor(props) {
     super(props);
+    this.updateTalkValue = this.updateTalkValue.bind(this);
+    this.validate = this.validate.bind(this);
     this.save = this.save.bind(this);
+    this.onSave = this.onSave.bind(this);
+    this.onCancel = this.onCancel.bind(this);
 
     this.state = {
       saving: false,
       saveErrors: {},
+      talk: { ...defaultTalk },
+      errors: { ...defaultErrors },
+    };
+  }
+
+  updateTalkValue(value) {
+    // value is an object that looks like { attributeName: value }
+    // Example: { name: 'Alan Vezina' }
+    this.setState((state) => ({
+      talk: {
+        ...state.talk,
+        ...value,
+      }
+    }));
+  }
+
+  validate() {
+    const { name, email, title, description, talkType } = this.state.talk;
+    let valid = true;
+
+    const errors = Object.keys(defaultErrors).reduce(
+      (errors, field) => {
+        const value = this.state.talk[field].trim();
+
+        if (value === '') {
+          valid = false;
+          errors[field] = 'This field is required.';
+        }
+
+        return errors;
+      },
+      { ...defaultErrors }
+    );
+
+    if (valid === false) {
+      throw errors;
+    }
+
+    return {
+      name,
+      email,
+      title,
+      description,
+      talk_type: talkType,
     };
   }
 
   async save(talk) {
     console.log('Save new talk!', talk);
-    this.setState({ saving: true });
-    await post('/api/talks', talk);
+    this.setState({ saving: true, saveErrors: {} });
+    const response = await post('/api/talks', talk);
+    this.setState({ saving: false });
+    const body = await response.json();
+    console.log(body);
+    console.log(response.status);
+    if (response.status >= 400) {
+      const errors = Object.keys(body).reduce((errors, attr) => {
+        errors[attr] = body[attr].join(' ');
+        return errors;
+      }, {});
+
+      console.log(errors);
+
+      this.setState(() => ({
+        errors: {
+          ...defaultErrors,
+          ...errors,
+        }
+      }));
+    } else {
+      this.setState(() => ({ errors: {...defaultErrors} }));
+    }
+  }
+
+  onSave() {
+    let talk = null;
+    let errors = { ...defaultErrors };
+
+    try {
+      talk = this.validate();
+    } catch (e) {
+      errors = e;
+    }
+
+    this.setState(() => ({ errors }));
+
+    if (talk !== null) {
+      this.save(talk);
+    }
+  }
+
+  onCancel() {
+    this.props.history.push('/');
   }
 
   render() {
@@ -33,8 +139,11 @@ class NewTalkView extends Component {
             <div className="column is-half">
               <TalkForm
                 saving={this.state.saving}
-                saveErrors={this.state.saveErrors}
-                save={this.save}
+                talk={this.state.talk}
+                errors={this.state.errors}
+                updateValue={this.updateTalkValue}
+                save={this.onSave}
+                cancel={this.onCancel}
               />
             </div>
           </div>

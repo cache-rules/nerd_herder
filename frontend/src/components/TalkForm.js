@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Form, Input } from './Form';
 
 const TALK_TYPE_CHOICES = [
@@ -7,143 +7,60 @@ const TALK_TYPE_CHOICES = [
   { value: 'full_length', label: 'Full Length (~25 minutes)' },
 ];
 
-const defaultTalk = {
-  email: '',
-  name: '',
-  title: '',
-  description: '',
-  talkType: '',
-};
-
-const defaultErrors = {
-  name: null,
-  email: null,
-  title: null,
-  description: null,
-  talkType: null,
-};
-
-
-class TalkForm extends Component {
-  constructor(props) {
-    super(props);
-    const { talk = defaultTalk } = props;
-
-    this.save = this.save.bind(this);
-    this.updateValue = this.updateValue.bind(this);
-    this.state = {
-      talk: {...talk},
-      errors: {...defaultErrors},
-    };
-  }
-
-  validate() {
-    const { name, email, title, description, talkType } = this.state.talk;
-    let valid = true;
-
-    const errors = Object.keys(defaultErrors).reduce((errors, field) => {
-      const value = this.state.talk[field].trim();
-
-      if (value === '') {
-        valid = false;
-        errors[field] = 'Required';
-      }
-
-      return errors;
-    }, {...defaultErrors});
-
-    if (valid === false) {
-      throw errors;
-    }
-
-    return {
-      name,
-      email,
-      title,
-      description,
-      talk_type: talkType,
-    };
-  }
-
-  save() {
-    let talk = null;
-    let errors = {...defaultErrors};
-
-    try {
-      talk = this.validate();
-    } catch (e) {
-      errors = e;
-    }
-
-    this.setState(() => ({ errors }));
-
-    if (talk !== null) {
-      this.props.save(talk);
-    }
-  }
-
-  updateValue(attr, value) {
-    this.setState(state => ({
-      talk: {
-        ...state.talk,
-        [attr]: value,
-      },
-    }));
-  }
-
+class TalkForm extends PureComponent {
   render() {
-    const { talk, errors } = this.state;
+    const { saving, talk, errors, updateValue, save, cancel } = this.props;
 
     return (
-      <Form save={this.save} cancel={this.props.cancel}>
+      <Form saving={saving} save={save} cancel={cancel}>
         <div className="field">
           <p>All fields are required.</p>
         </div>
 
         <Input
-          required
           type="text"
+          name="name"
           label="Name"
           value={talk.name}
           error={errors.name}
-          onChange={value => this.updateValue('name', value)}
+          onChange={updateValue}
         />
 
         <Input
-          required
           type="text"
+          name="email"
           label="Email"
           value={talk.email}
           error={errors.email}
-          onChange={value => this.updateValue('email', value)}
+          onChange={updateValue}
         />
 
         <Input
-          required
           type="text"
+          name="title"
           label="Talk title"
           value={talk.title}
           error={errors.title}
-          onChange={value => this.updateValue('title', value)}
+          onChange={updateValue}
         />
 
         <Input
-          required
           type="textarea"
+          name="description"
           label="Talk description"
           value={talk.description}
           error={errors.description}
-          onChange={value => this.updateValue('description', value)}
+          onChange={updateValue}
         />
 
         <Input
           type="select"
-          name="talk_type"
+          name="talkType"
           label="Talk type"
           value={talk.talkType}
           error={errors.talkType}
           options={TALK_TYPE_CHOICES}
-          onChange={value => this.updateValue('talkType', value)}
+          onChange={updateValue}
         />
       </Form>
     );
