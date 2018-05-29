@@ -38,11 +38,11 @@ class NewTalkView extends Component {
   updateTalkValue(value) {
     // value is an object that looks like { attributeName: value }
     // Example: { name: 'Alan Vezina' }
-    this.setState((state) => ({
+    this.setState(state => ({
       talk: {
         ...state.talk,
         ...value,
-      }
+      },
     }));
   }
 
@@ -78,29 +78,27 @@ class NewTalkView extends Component {
   }
 
   async save(talk) {
-    console.log('Save new talk!', talk);
     this.setState({ saving: true, saveErrors: {} });
     const response = await post('/api/talks', talk);
     this.setState({ saving: false });
     const body = await response.json();
-    console.log(body);
-    console.log(response.status);
+
     if (response.status >= 400) {
-      const errors = Object.keys(body).reduce((errors, attr) => {
-        errors[attr] = body[attr].join(' ');
-        return errors;
-      }, {});
+      const errors = Object.keys(body).reduce(
+        (errors, attr) => {
+          errors[attr] = body[attr].join(' ');
+          return errors;
+        },
+        { ...defaultErrors }
+      );
 
-      console.log(errors);
-
+      this.setState(() => ({ errors }));
+    } else {
       this.setState(() => ({
         errors: {
           ...defaultErrors,
-          ...errors,
-        }
+        },
       }));
-    } else {
-      this.setState(() => ({ errors: {...defaultErrors} }));
     }
   }
 
@@ -129,9 +127,7 @@ class NewTalkView extends Component {
     return (
       <section className="main section">
         <div className="container">
-          <h1 className="title">
-            Submit a Talk
-          </h1>
+          <h1 className="title">Submit a Talk</h1>
         </div>
 
         <div className="container">
