@@ -1,4 +1,4 @@
-localhost:8080 {
+0.0.0.0:8080 {
     tls self_signed
     gzip
     root /var/www/nerd_herder/static

@@ -18,7 +18,7 @@
   "devDependencies": {
     "prettier": "^1.12.1"
   },
-  "proxy": "http://0.0.0.0:9000",
+  "proxy": "https://0.0.0.0:8080",
   "homepage": "https://pspython.com/app/",
   "prettier": {
     "printWidth": 100,
