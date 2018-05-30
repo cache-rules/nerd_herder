@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('code-of-conduct', code_of_conduct),
-    path('code-of-conduct-reporting-guide', code_of_conduct_reporting_guide),
-    path('code-of-conduct-response-playbook', code_of_conduct_response_playbook),
+    path('code-of-conduct/reporting-guide', code_of_conduct_reporting_guide),
+    path('code-of-conduct/response-playbook', code_of_conduct_response_playbook),
     path('api/talks', include(talks_urls, namespace='talks')),
 ]
