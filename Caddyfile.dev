@@ -2,7 +2,29 @@
     tls self_signed
     gzip
     root /var/www/nerd_herder/static
-    proxy / nerd_herder:8080 {
+
+    proxy /api nerd_herder:8080 {
         transparent
+    }
+
+    proxy /admin nerd_herder:8080 {
+        transparent
+    }
+
+    proxy /code-of-conduct nerd_herder:8080 {
+        transparent
+    }
+
+    proxy /static/admin nerd_herder:8080 {
+        transparent
+    }
+
+    proxy /static/rest_framework nerd_herder:8080 {
+        transparent
+    }
+
+    proxy / frontend:3000 {
+        transparent
+        websocket
     }
 }

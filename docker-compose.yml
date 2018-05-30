@@ -11,7 +11,9 @@ services:
     image: redis:alpine
     restart: always
   nerd_herder:
-    build: .
+    build:
+      context: .
+      dockerfile: docker/nerd_herder/Dockerfile
     restart: always
     links:
       - redis

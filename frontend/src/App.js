@@ -9,7 +9,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-        <BrowserRouter basename="/app/">
+        <BrowserRouter>
           <div>
             <Route path="/" component={Header} />
             <Route exact path="/" component={HomeView} />

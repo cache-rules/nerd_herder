@@ -8,7 +8,6 @@ services:
   redis:
     image: 'redis:alpine'
   nerd_herder:
-    build: .
     command: ['./wait-for-it.sh', 'postgres:5432', '--', 'python', 'manage.py', 'runserver',
     '0.0.0.0:8080']
     environment:
@@ -24,14 +23,21 @@ services:
     links:
       - redis
       - postgres
-  # TODO: Add service for react build. Probably don't need caddy that way though.
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    volumes:
+        - './frontend/:/usr/src/nerd_herder/frontend/'
   reverse_proxy:
     image: abiosoft/caddy:0.11.0-no-stats
     restart: always
     depends_on:
       - nerd_herder
+      - frontend
     links:
       - nerd_herder
+      - frontend
     volumes:
       - './.docker-data/caddy:/root/.caddy'
       - './Caddyfile.dev:/etc/Caddyfile'
