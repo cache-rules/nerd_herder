@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'nerd_herder',
+    'nerd_herder.code_of_conduct',
     'nerd_herder.users',
     'nerd_herder.speakers',
     'nerd_herder.talks',

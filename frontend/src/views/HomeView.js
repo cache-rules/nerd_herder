@@ -38,7 +38,7 @@ class HomeView extends PureComponent {
               </div>
 
               <div className="level-item has-text-centered">
-                <a href="/code-of-conduct">
+                <a href="pages/code-of-conduct">
                   <div className="home-link-item">
                     <i className="fas fa-file-alt fa-4x" />
                     <span className="home-link-item__label">Code of Conduct</span>

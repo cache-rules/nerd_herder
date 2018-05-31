@@ -10,7 +10,7 @@
                     <div class="content">
                         <p>
                             In any PuPPy space (events or online), if you believe someone
-                            is violating the <a href="/code-of-conduct">Code of Conduct</a>,
+                            is violating the <a href="/pages/code-of-conduct">Code of Conduct</a>,
                             we ask that you report it to the staff by emailing
                             <a href="mailto:conduct@pspython.com">conduct@pspython.com</a>.
                             All reports will be kept confidential. In some cases we may
@@ -45,21 +45,17 @@
                             <a href="mailto:conduct@pspython.com">conduct@pspython.com</a>.
                         </p>
 
-                        <p><strong>Alan Vezina</strong></p>
+                        {% for member in committee_members %}
+                            <p><strong>{{ member.name }}</strong></p>
 
-                        <ul>
-                            <li><a href="mailto:alan@pspython.com">alan@pspython.com</a></li>
+                            <ul>
+                                <li>
+                                    <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+                                </li>
 
-                            <li>slack: @alanv</li>
-                        </ul>
-
-                        <p><strong>Don Sheu</strong></p>
-
-                        <ul>
-                            <li><a href="mailto:don@pspython.com">don@pspython.com</a></li>
-
-                            <li>slack: @don</li>
-                        </ul>
+                                <li>slack: {{ member.slack }}</li>
+                            </ul>
+                        {% endfor %}
 
                         <h2>What to include in the report</h2>
 
@@ -101,8 +97,8 @@
                         <p>
                             The PuPPy community team aims to follow the process
                             outlined in the
-                            <a href="/code-of-conduct/response-playbook">Code of Conduct Response
-                                Playbook</a>.
+                            <a href="/pages/code-of-conduct/response-playbook">Code of Conduct
+                                Response Playbook</a>.
                         </p>
 
                         <p>
@@ -149,11 +145,11 @@
                         <div class="conduct-pages">
                             <ul>
                                 <li>
-                                    <a href="/code-of-conduct">Code of Conduct</a>
+                                    <a href="/pages/code-of-conduct">Code of Conduct</a>
                                 </li>
 
                                 <li>
-                                    <a href="/code-of-conduct/response-playbook">Response
+                                    <a href="/pages/code-of-conduct/response-playbook">Response
                                         Playbook</a>
                                 </li>
                             </ul>

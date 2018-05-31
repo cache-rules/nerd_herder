@@ -1,7 +1,6 @@
 0.0.0.0:8080 {
     tls self_signed
     gzip
-    root /var/www/nerd_herder/static
 
     proxy /api nerd_herder:8080 {
         transparent
@@ -11,7 +10,7 @@
         transparent
     }
 
-    proxy /code-of-conduct nerd_herder:8080 {
+    proxy /pages nerd_herder:8080 {
         transparent
     }
 

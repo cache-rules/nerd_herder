@@ -17,14 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from nerd_herder.talks import urls as talks_urls
-from nerd_herder.views import index, code_of_conduct, code_of_conduct_reporting_guide,\
-    code_of_conduct_response_playbook
+from nerd_herder.code_of_conduct import urls as code_of_conduct_urls
+from nerd_herder.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('code-of-conduct', code_of_conduct),
-    path('code-of-conduct/reporting-guide', code_of_conduct_reporting_guide),
-    path('code-of-conduct/response-playbook', code_of_conduct_response_playbook),
+    path('pages/code-of-conduct/', include(code_of_conduct_urls, namespace='code_of_conduct')),
     path('api/talks', include(talks_urls, namespace='talks')),
 ]
