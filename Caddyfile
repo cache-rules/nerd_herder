@@ -1,4 +1,4 @@
-pspython.com {
+www.pspython.com {
     tls {$TLS_EMAIL}
     gzip
     root /var/www/nerd_herder/static
