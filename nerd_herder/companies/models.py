@@ -6,6 +6,9 @@ from nerd_herder.models import UUIDModel, TimeStampedModel, ContactModel
 class Company(UUIDModel, TimeStampedModel):
     name = models.CharField(max_length=128)
 
+    class Meta:
+        verbose_name_plural = 'Companies'
+
     def __str__(self):
         return self.name
 
