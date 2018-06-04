@@ -1,17 +1,20 @@
-www.pspython.com {
-    tls {$TLS_EMAIL}
+:8080 {
+    tls self_signed
     gzip
     root /var/www/nerd_herder
 
+    # Don't use index.html file from static directory
     rewrite {
         if {path} is /
         to /proxy/{uri}
     }
 
+    # First attempt to load the file (via {path}), if that fails re-write to the proxy URL
     rewrite {
         to {path} /proxy/{uri}
     }
 
+    # Proxy to nerd_herder service via /proxy, but drop the /proxy prefix
     proxy /proxy nerd_herder:8080 {
         transparent
         without /proxy

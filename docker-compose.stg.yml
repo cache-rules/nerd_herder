@@ -1,0 +1,38 @@
+version: '3'
+services:
+  postgres:
+    environment:
+      - POSTGRES_PASSWORD=nerd_herder
+    volumes:
+      - './.docker-data/postgresql/data:/var/lib/postgresql/data/'
+  redis:
+    image: 'redis:alpine'
+  nerd_herder:
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    environment:
+      - POSTGRES_USER=nerd_herder
+      - POSTGRES_PASSWORD=nerd_herder
+      - DEBUG=FALSE
+    depends_on:
+      - redis
+      - postgres
+    links:
+      - redis
+      - postgres
+  reverse_proxy:
+    build:
+      context: .
+      dockerfile: docker/reverse_proxy/Dockerfile
+    restart: always
+    depends_on:
+      - nerd_herder
+    links:
+      - nerd_herder
+    volumes:
+      - './.docker-data/caddy:/root/.caddy'
+      - './Caddyfile.stg:/etc/Caddyfile'
+    ports:
+      - '8080:8080'

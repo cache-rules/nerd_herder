@@ -9,17 +9,19 @@ services:
     image: 'redis:alpine'
   nerd_herder:
     image: 'path/to/nerd_herder/gitlab/image'
-    command: python manage.py runserver 0.0.0.0:8080
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: on-failure
     env_file:
       - nerd_herder.env
     links:
       - redis
       - postgres
   reverse-proxy:
-    # TODO: make an image for caddy that uses the nerd_herder image as an intermediary to copy
-    # static assets from. Should also copy static assets from frontend build.
-    # nerd_herder static assets are stored in /usr/src/nerd_herder/static after collectstatic runs.
-    image: abiosoft/caddy:0.11.0-no-stats
+    build:
+      context: .
+      dockerfile: docker/reverse_proxy/Dockerfile
     restart: always
     env_file:
       - caddy.env
