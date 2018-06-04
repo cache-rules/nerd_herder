@@ -1,3 +1,4 @@
+from nerd_herder.utils import init_logging
 from .base import *
 
 DEBUG = os.environ.get('DEBUG') == 'TRUE'
@@ -32,3 +33,7 @@ CACHES = {
         },
     },
 }
+
+ASSET_MANIFEST_HOST = os.environ.get('ASSET_MANIFEST_HOST')
+
+init_logging()
