@@ -10,7 +10,6 @@ start: cmd := start $(name)
 restart: cmd := restart $(name)
 stop: cmd := stop $(name)
 logs: cmd := logs -f
-bash: cmd := exec $(name) ls -l /var/www/nerd_herder/
 
 ifeq ($(env), staging)
 	options := -f docker-compose.yml -f docker-compose.stg.yml
