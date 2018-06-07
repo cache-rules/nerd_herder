@@ -8,7 +8,6 @@ services:
   redis:
     image: 'redis:alpine'
   nerd_herder:
-    image: 'path/to/nerd_herder/gitlab/image'
     deploy:
       replicas: 3
       restart_policy:
