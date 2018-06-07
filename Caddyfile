@@ -13,6 +13,10 @@ www.pspython.com {
         to {path} {path}/ /
     }
 
+    rewrite /favicon {
+        to {path}
+    }
+
     # First attempt to load the file (via {path}), if that fails re-write to the proxy URL
     rewrite {
         to {path} /proxy/{uri}
