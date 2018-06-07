@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import sys
@@ -23,11 +24,24 @@ def init_logging(log_format=DEFAULT_LOG_FORMAT, date_format=DEFAULT_DATE_FORMAT)
 
 def get_asset_manifest(request):
     logger.info('Retrieving asset manifest')
-    host = getattr(settings, 'ASSET_MANIFEST_HOST', request.META.get('HTTP_HOST'))
+    host = getattr(settings, 'ASSET_MANIFEST_HOST')
+
+    if host is None:
+        # This should only be in dev mode. You will need to manually copy a built css file from
+        # the frontend build to nerd_herder/static/main.css
+        return {'main.js': '', 'main.css': 'static/main.css'}
+
     url = f'https://{host}/asset-manifest.json'
-    logger.info(f'Asset Manifest URL: {url}')
-    r = requests.get(url, verify=False)
-    return r.json()
+
+    try:
+        r = requests.get(url, verify=False)
+        return r.json()
+    except requests.RequestException:
+        logger.error(f'Unable to retrieve asset manifest from {url}')
+    except json.decoder.JSONDecodeError:
+        logger.error(f'Asset manifest URL {url} did not return JSON')
+
+    return {'main.js': '', 'main.css': ''}
 
 
 def get_asset_urls(request):
