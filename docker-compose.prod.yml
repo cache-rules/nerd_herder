@@ -30,7 +30,6 @@ services:
       - nerd_herder
     volumes:
       - '/var/lib/caddy:/root/.caddy'
-      - './Caddyfile:/etc/Caddyfile'
     ports:
       - '80:80'
       - '443:443'
