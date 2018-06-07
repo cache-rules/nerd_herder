@@ -31,6 +31,8 @@ services:
         - './frontend/:/usr/src/nerd_herder/frontend/'
   reverse_proxy:
     image: abiosoft/caddy:0.11.0-no-stats
+    environment:
+      - ACME_AGREE=true
     restart: always
     depends_on:
       - nerd_herder

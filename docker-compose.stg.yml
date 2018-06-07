@@ -30,6 +30,8 @@ services:
     build:
       context: .
       dockerfile: docker/reverse_proxy/Dockerfile
+    environment:
+      - ACME_AGREE=true
     restart: always
     depends_on:
       - nerd_herder
