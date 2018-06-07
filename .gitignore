@@ -107,3 +107,6 @@ caddy.env
 nerd_herder.env
 postgres.env
 .docker-data/
+
+# main.css is just a hack to get our styles on our django pages during a dev build.
+nerd_herder/static/main.css
