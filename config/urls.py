@@ -18,11 +18,9 @@ from django.urls import path, include
 
 from nerd_herder.talks import urls as talks_urls
 from nerd_herder.code_of_conduct import urls as code_of_conduct_urls
-from nerd_herder.views import app
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', app),
     path('pages/code-of-conduct/', include(code_of_conduct_urls, namespace='code_of_conduct')),
     path('api/talks', include(talks_urls, namespace='talks')),
 ]
