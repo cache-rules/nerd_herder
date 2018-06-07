@@ -3,10 +3,14 @@
     gzip
     root /var/www/nerd_herder
 
-    # Don't use index.html file from static directory
-    rewrite {
+    redir 302 {
+        # Caddy is dumb and has no way of redirecting only the index without this if statment.
         if {path} is /
-        to /proxy/{uri}
+        / /app/
+    }
+
+    rewrite /app {
+        to {path} {path}/ /
     }
 
     # First attempt to load the file (via {path}), if that fails re-write to the proxy URL

@@ -2,28 +2,26 @@
     tls self_signed
     gzip
 
-    proxy /api nerd_herder:8080 {
-        transparent
+    redir 302 {
+        if {path} is /
+        / /app/
     }
 
-    proxy /admin nerd_herder:8080 {
-        transparent
-    }
-
-    proxy /pages nerd_herder:8080 {
-        transparent
-    }
-
-    proxy /static/admin nerd_herder:8080 {
-        transparent
-    }
-
-    proxy /static/rest_framework nerd_herder:8080 {
-        transparent
-    }
-
-    proxy / frontend:3000 {
+    proxy /sockjs-node frontend:3000 {
         transparent
         websocket
+    }
+
+    proxy /static/js frontend:3000 {
+        transparent
+    }
+
+    proxy /app frontend:3000 {
+        transparent
+    }
+
+    proxy / nerd_herder:8080 {
+        except /app /static/js/bundle
+        transparent
     }
 }

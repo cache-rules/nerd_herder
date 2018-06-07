@@ -3,15 +3,22 @@ www.pspython.com {
     gzip
     root /var/www/nerd_herder
 
-    rewrite {
+    redir 302 {
+        # Caddy is dumb and has no way of redirecting only the index without this if statment.
         if {path} is /
-        to /proxy/{uri}
+        / /app/
     }
 
+    rewrite /app {
+        to {path} {path}/ /
+    }
+
+    # First attempt to load the file (via {path}), if that fails re-write to the proxy URL
     rewrite {
         to {path} /proxy/{uri}
     }
 
+    # Proxy to nerd_herder service via /proxy, but drop the /proxy prefix
     proxy /proxy nerd_herder:8080 {
         transparent
         without /proxy
