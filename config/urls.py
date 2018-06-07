@@ -25,5 +25,4 @@ urlpatterns = [
     path('', app),
     path('pages/code-of-conduct/', include(code_of_conduct_urls, namespace='code_of_conduct')),
     path('api/talks', include(talks_urls, namespace='talks')),
-    path('/<path:path>', app)
 ]
