@@ -7,6 +7,11 @@
         / /app/
     }
 
+    rewrite {
+        r '~*.hot-update.json'
+        to /app/{uri}
+    }
+
     proxy /sockjs-node frontend:3000 {
         transparent
         websocket
