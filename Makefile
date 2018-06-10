@@ -1,22 +1,40 @@
 env :=dev
 
-docker_compose:
-	docker-compose $(options) $(cmd)
-
-up: cmd := up -d
-down: cmd := down
-build: cmd := build
-start: cmd := start $(name)
-restart: cmd := restart $(name)
-stop: cmd := stop $(name)
-logs: cmd := logs -f
-
 ifeq ($(env), staging)
-	options := -f docker-compose.yml -f docker-compose.stg.yml
+  compose_file=docker-compose.stg.yml
 else ifeq ($(env), prod)
-	options := -f docker-compose.yml -f docker-compose.prod.yml
+  compose_file=docker-compose.prod.yml
 else
-	options :=
+  compose_file=docker-compose.dev.yml
 endif
 
-up down build start restart stop logs bash: docker_compose
+login:
+	docker login registry.gitlab.com
+
+stack:
+	docker stack $(cmd) $(options)
+
+build push:
+	docker-compose -f $(compose_file) $(cmd)
+
+ls: cmd := ls
+rm: cmd := rm
+ps: cmd := ps
+rm ps: options := nerd_herder_$(env)
+deploy: cmd := deploy
+deploy: options := -c $(compose_file) nerd_herder_$(env)
+ls rm ps deploy: stack
+
+docker_compose:
+	@docker-compose -f $(compose_file) $(cmd)
+
+build: cmd := build
+push: cmd := push
+up: cmd:= up -d
+down: cmd:= down
+restart: cmd:= restart $(name)
+logs: cmd:= logs -f
+build push up down restart logs: docker_compose
+
+slogs:
+	docker service logs -f nerd_herder_$(name)

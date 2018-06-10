@@ -12,6 +12,3 @@ COPY frontend/src/ ./src/
 COPY frontend/public/ ./public/
 
 EXPOSE 3000
-
-ENTRYPOINT ["yarn"]
-CMD ["start"]

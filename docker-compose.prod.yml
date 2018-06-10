@@ -1,6 +1,11 @@
 version: '3'
 services:
   postgres:
+    image: postgres:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
     env_file:
       - postgres.env
     volumes:
@@ -8,6 +13,10 @@ services:
   redis:
     image: 'redis:alpine'
   nerd_herder:
+    build:
+      context: .
+      dockerfile: docker/nerd_herder/Dockerfile
+    image: registry.gitlab.com/cache-rules/nerd_herder_ops/nerd_herder:latest
     deploy:
       replicas: 3
       restart_policy:
@@ -17,11 +26,22 @@ services:
     links:
       - redis
       - postgres
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    image: registry.gitlab.com/cache-rules/nerd_herder_ops/frontend:latest
+    deploy:
+      replicas: 0
   reverse-proxy:
     build:
       context: .
       dockerfile: docker/reverse_proxy/Dockerfile
-    restart: always
+    image: registry.gitlab.com/cache-rules/nerd_herder_ops/reverse-proxy:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
     env_file:
       - caddy.env
     links:
