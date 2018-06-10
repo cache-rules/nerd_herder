@@ -14,9 +14,6 @@ login:
 stack:
 	docker stack $(cmd) $(options)
 
-build push:
-	docker-compose -f $(compose_file) $(cmd)
-
 ls: cmd := ls
 rm: cmd := rm
 ps: cmd := ps
@@ -26,7 +23,7 @@ deploy: options := -c $(compose_file) nerd_herder_$(env)
 ls rm ps deploy: stack
 
 docker_compose:
-	@docker-compose -f $(compose_file) $(cmd)
+	docker-compose -f $(compose_file) $(cmd)
 
 build: cmd := build
 push: cmd := push
