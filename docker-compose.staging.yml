@@ -66,6 +66,6 @@ services:
       - nerd_herder
     volumes:
       - './.docker-data/caddy:/root/.caddy'
-      - './Caddyfile.stg:/etc/Caddyfile'
+      - './Caddyfile.staging:/etc/Caddyfile'
     ports:
       - '8080:8080'
