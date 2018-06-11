@@ -22,7 +22,7 @@ def init_logging(log_format=DEFAULT_LOG_FORMAT, date_format=DEFAULT_DATE_FORMAT)
     )
 
 
-def get_asset_manifest(request):
+def get_asset_manifest():
     logger.info('Retrieving asset manifest')
     host = getattr(settings, 'ASSET_MANIFEST_HOST')
 
@@ -44,11 +44,11 @@ def get_asset_manifest(request):
     return {'main.js': '', 'main.css': ''}
 
 
-def get_asset_urls(request):
+def get_asset_urls():
     manifest = cache.get(ASSET_MANIFEST_KEY, None)
 
     if manifest is None:
-        manifest = get_asset_manifest(request)
+        manifest = get_asset_manifest()
         cache.set(ASSET_MANIFEST_KEY, manifest, 60)
 
     return f'/{manifest["main.js"]}', f'/{manifest["main.css"]}'
