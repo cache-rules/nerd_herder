@@ -81,7 +81,17 @@ class NewTalkView extends Component {
     this.setState({ saving: true, saveErrors: {} });
     const response = await post('/api/talks', talk);
     this.setState({ saving: false });
-    const body = await response.json();
+    let body;
+
+    try {
+      body = await response.json();
+    } catch (e) {
+      body = {
+        other: [
+          'Unexpected error returned from server. Please try again later.'
+        ]
+      };
+    }
 
     if (response.status >= 400) {
       const errors = Object.keys(body).reduce(
