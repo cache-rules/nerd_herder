@@ -106,6 +106,7 @@ config/settings/local.py
 caddy.env
 nerd_herder.env
 postgres.env
+slack.env
 .docker-data/
 
 # main.css is just a hack to get our styles on our django pages during a dev build.

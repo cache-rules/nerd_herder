@@ -35,6 +35,7 @@ services:
       - '0.0.0.0:8080'
     env_file:
       - nerd_herder.dev.env
+      - slack.env
     volumes:
       - './nerd_herder/:/usr/src/nerd_herder/nerd_herder/'
       - './config/:/usr/src/nerd_herder/config/'
