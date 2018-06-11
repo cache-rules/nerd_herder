@@ -8,6 +8,14 @@ from .models import TalkProposal
 from .serializers import TalkProposalSerializer
 
 
+def get_talk_type_label(value):
+    for talk_type in TalkProposal.TALK_TYPES:
+        if talk_type[0] == value:
+            return talk_type[1]
+
+    return value
+
+
 class TalkProposalList(generics.ListCreateAPIView):
     permission_classes = [AuthenticatedCanGet]
     queryset = TalkProposal.objects.all()
@@ -17,7 +25,7 @@ class TalkProposalList(generics.ListCreateAPIView):
         data = super().create(request, *args, **kwargs).data
         title = data['title']
         name = data['name']
-        talk_type = data['talk_type']
+        talk_type = get_talk_type_label(data['talk_type'])
         description = data['description']
         channel = settings.SLACK_TALK_PROPOSAL_CHANNEL
         text = ':tada: A new talk has been submitted! :tada:'
