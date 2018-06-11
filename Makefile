@@ -1,12 +1,5 @@
 env :=dev
-
-ifeq ($(env), staging)
-  compose_file=docker-compose.stg.yml
-else ifeq ($(env), prod)
-  compose_file=docker-compose.prod.yml
-else
-  compose_file=docker-compose.dev.yml
-endif
+compose_file := docker-compose.$(env).yml
 
 login:
 	docker login registry.gitlab.com
@@ -19,8 +12,18 @@ rm: cmd := rm
 ps: cmd := ps
 rm ps: options := nerd_herder_$(env)
 deploy: cmd := deploy
-deploy: options := -c $(compose_file) nerd_herder_$(env)
+deploy: options := --with-registry-auth -c $(compose_file) nerd_herder_$(env)
 ls rm ps deploy: stack
+
+service:
+	docker service $(cmd) $(options)
+
+sls: cmd := ls
+sps: cmd := ps
+sps: options := nerd_herder_$(env)_$(name)
+slogs: cmd:= logs
+slogs: options := -f nerd_herder_$(env)_$(name)
+sls sps slogs: service
 
 docker_compose:
 	docker-compose -f $(compose_file) $(cmd)
@@ -31,7 +34,5 @@ up: cmd:= up -d
 down: cmd:= down
 restart: cmd:= restart $(name)
 logs: cmd:= logs -f
-build push up down restart logs: docker_compose
-
-slogs:
-	docker service logs -f nerd_herder_$(name)
+exec: cmd:= exec $(name) $(c)
+build push up down restart logs exec: docker_compose
