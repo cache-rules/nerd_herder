@@ -109,6 +109,8 @@ class NewTalkView extends Component {
           ...defaultErrors,
         },
       }));
+
+      this.props.history.push('/speak/success')
     }
   }
 
