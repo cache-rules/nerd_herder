@@ -6,4 +6,4 @@ FROM abiosoft/caddy:0.11.0-no-stats
 
 COPY --from=frontend /usr/src/nerd_herder/frontend/build /var/www/nerd_herder/
 COPY --from=backend /usr/src/nerd_herder/static /var/www/nerd_herder/static
-COPY ./Caddyfile.prod /etc/Caddyfile
+COPY ./Caddyfile /etc/Caddyfile

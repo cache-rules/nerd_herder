@@ -52,14 +52,14 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
-    environment:
-      - ACME_AGREE=true
+    env_file:
+      - caddy.staging.env
     depends_on:
       - nerd_herder
     links:
       - nerd_herder
     volumes:
       - './.docker-data/caddy:/root/.caddy'
-      - './Caddyfile.staging:/etc/Caddyfile'
+      - './Caddyfile:/etc/Caddyfile'
     ports:
       - '8080:8080'

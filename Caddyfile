@@ -1,5 +1,5 @@
-:8080 {
-    tls self_signed
+{$CADDY_HOST} {
+    tls {$CADDY_TLS_EMAIL}
     gzip
     root /var/www/nerd_herder
 
