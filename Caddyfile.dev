@@ -17,7 +17,7 @@
         websocket
     }
 
-    proxy /static/js frontend:3000 {
+    proxy /static/js/bundle frontend:3000 {
         transparent
     }
 
@@ -26,7 +26,6 @@
     }
 
     proxy / nerd_herder:8080 {
-        except /app /static/js/bundle
         transparent
     }
 }
