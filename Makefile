@@ -32,7 +32,9 @@ build: cmd := build
 push: cmd := push
 up: cmd:= up -d
 down: cmd:= down
+start: cmd:= start $(name)
+stop: cmd:= stop $(name)
 restart: cmd:= restart $(name)
 logs: cmd:= logs -f
 exec: cmd:= exec $(name) $(c)
-build push up down restart logs exec: docker_compose
+build push up down start stop restart logs exec: docker_compose
