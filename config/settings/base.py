@@ -138,3 +138,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+# ASSET_MANIFEST_HOST is used in prod/staging to download the asset manifest created by
+# CreateReactApp, this way we can point to the built CSS styles.
+ASSET_MANIFEST_HOST = os.environ.get('ASSET_MANIFEST_HOST')

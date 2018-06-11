@@ -34,6 +34,4 @@ CACHES = {
     },
 }
 
-ASSET_MANIFEST_HOST = os.environ.get('ASSET_MANIFEST_HOST')
-
 init_logging()
