@@ -79,7 +79,7 @@ class NewTalkView extends Component {
 
   async save(talk) {
     this.setState({ saving: true, saveErrors: {} });
-    const response = await post('/api/talks', talk);
+    const response = await post('/api/v1/talk-proposals/', talk);
     this.setState({ saving: false });
     let body;
 

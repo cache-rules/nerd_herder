@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from nerd_herder.talks import urls as talks_urls
-from nerd_herder.code_of_conduct import urls as code_of_conduct_urls
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pages/code-of-conduct/', include(code_of_conduct_urls, namespace='code_of_conduct')),
-    path('api/talks', include(talks_urls, namespace='talks')),
+    path('pages/code-of-conduct/',
+         include('nerd_herder.code_of_conduct.urls', namespace='code_of_conduct')),
+    path('api/v1/talks/', include('nerd_herder.talks.urls', namespace='talks')),
+    path('api/v1/talk-proposals/',
+         include('nerd_herder.talk_proposals.urls', namespace='talk_proposals')),
 ]
