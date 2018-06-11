@@ -10,11 +10,14 @@ const TALK_TYPE_CHOICES = [
 class TalkForm extends PureComponent {
   render() {
     const { saving, talk, errors, updateValue, save, cancel } = this.props;
+    const other = errors.other ? errors.other : '';
 
     return (
       <Form saving={saving} save={save} cancel={cancel}>
         <div className="field">
           <p>All fields are required.</p>
+
+          <p className="has-text-danger">{other}</p>
         </div>
 
         <Input
