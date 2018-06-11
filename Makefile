@@ -37,4 +37,5 @@ stop: cmd:= stop $(name)
 restart: cmd:= restart $(name)
 logs: cmd:= logs -f
 exec: cmd:= exec $(name) $(c)
-build push up down start stop restart logs exec: docker_compose
+dcps: cmd:= ps
+build push up down start stop restart logs exec dcps: docker_compose
