@@ -2,11 +2,8 @@ version: '3'
 services:
   postgres:
     image: postgres:latest
-    environment:
-      - POSTGRES_USER=nerd_herder
-      - POSTGRES_DATABASE=nerd_herder
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_PASSWORD=nerd_herder
+    env_file:
+      - postgres.dev.env
     deploy:
       replicas: 1
       restart_policy:
@@ -36,10 +33,8 @@ services:
       - 'manage.py'
       - 'runserver'
       - '0.0.0.0:8080'
-    environment:
-      - POSTGRES_USER=nerd_herder
-      - POSTGRES_PASSWORD=nerd_herder
-      - DEBUG=TRUE
+    env_file:
+      - nerd_herder.dev.env
     volumes:
       - './nerd_herder/:/usr/src/nerd_herder/nerd_herder/'
       - './config/:/usr/src/nerd_herder/config/'
