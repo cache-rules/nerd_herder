@@ -144,7 +144,8 @@ STATIC_URL = '/static/'
 ASSET_MANIFEST_HOST = os.environ.get('ASSET_MANIFEST_HOST')
 
 # Slack settings
-SLACK_WEBHOOK_URL = os.environ.get('SLACK_WEBHOOK_URL')
+SLACK_BOT_USER_TOKEN = os.environ.get('SLACK_BOT_USER_TOKEN')
+SLACK_VERIFICATION_TOKEN = os.environ.get('SLACK_VERIFICATION_TOKEN')
 SLACK_BOT_NAME = os.environ.get('SLACK_BOT_NAME', 'nerd_herder')
 SLACK_BOT_EMOJI = os.environ.get('SLACK_BOT_EMOJI', 'snake')
 SLACK_TALK_PROPOSAL_CHANNEL = os.environ.get('SLACK_TALK_PROPOSAL_CHANNEL', 'talk_proposals')

@@ -5,3 +5,4 @@ gunicorn==19.8.1
 psycopg2-binary==2.7.4
 pytest==3.3.2
 requests==2.18.4
+slackclient==1.2.1
