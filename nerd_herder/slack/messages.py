@@ -17,7 +17,13 @@ def send_message(channel, text, attachments=None):
     Returns:
 
     """
-    client = SlackClient(settings.SLACK_BOT_USER_TOKEN)
+    token = settings.SLACK_BOT_USER_TOKEN
+
+    if token is None:
+        logger.warning('Unable to send slack message: SLACK_BOT_USER_TOKEN not set.')
+        return
+
+    client = SlackClient(token)
     bot_name = settings.SLACK_BOT_NAME
     bot_emoji = settings.SLACK_BOT_EMOJI
     response = client.api_call(
