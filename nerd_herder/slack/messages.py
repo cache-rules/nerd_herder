@@ -8,6 +8,9 @@ logger = logging.getLogger(__name__)
 
 def send_message(channel, text, attachments=None):
     """
+    Sends a message to the slack channel of your choice. Does not attempt to send a message if the
+    SLACK_BOT_USER_TOKEN environment variable is not set.
+
     Args:
         channel: The channel to post to
         text: The text to post
@@ -15,7 +18,7 @@ def send_message(channel, text, attachments=None):
             https://api.slack.com/docs/message-attachments
 
     Returns:
-
+        None
     """
     token = settings.SLACK_BOT_USER_TOKEN
 
