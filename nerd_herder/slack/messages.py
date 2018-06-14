@@ -98,7 +98,7 @@ def open_submit_talk_dialog(trigger_id) -> None:
                 'type': 'textarea',
             },
             {
-                'label': 'Talk talk',
+                'label': 'Talk type',
                 'name': 'talk_type',
                 'type': 'select',
                 'options': talk_types,
