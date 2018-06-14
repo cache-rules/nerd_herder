@@ -64,6 +64,7 @@ def submit_talk_action(payload):
     serializer.is_valid(raise_exception=True)
     serializer.save()
     talk_proposal_notification(serializer.data)
+    # TODO: respond to the user who submitted the talk with an ephemeral message thanking them.
 
 
 ACTIONS = {

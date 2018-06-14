@@ -41,7 +41,7 @@ class TalkForm extends PureComponent {
         <Input
           type="text"
           name="title"
-          label="Talk title"
+          label="Title"
           value={talk.title}
           error={errors.title}
           onChange={updateValue}
@@ -50,7 +50,7 @@ class TalkForm extends PureComponent {
         <Input
           type="textarea"
           name="description"
-          label="Talk description"
+          label="Description"
           value={talk.description}
           error={errors.description}
           onChange={updateValue}
@@ -59,7 +59,7 @@ class TalkForm extends PureComponent {
         <Input
           type="select"
           name="talkType"
-          label="Talk type"
+          label="Duration"
           value={talk.talkType}
           error={errors.talkType}
           options={TALK_TYPE_CHOICES}

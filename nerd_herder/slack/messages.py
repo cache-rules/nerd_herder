@@ -88,17 +88,17 @@ def open_submit_talk_dialog(trigger_id) -> None:
                 'placeholder': 'you@example.com',
             },
             {
-                'label': 'Talk title',
+                'label': 'Title',
                 'name': 'title',
                 'type': 'text',
             },
             {
-                'label': 'Talk description',
+                'label': 'Description',
                 'name': 'description',
                 'type': 'textarea',
             },
             {
-                'label': 'Talk type',
+                'label': 'Duration',
                 'name': 'talk_type',
                 'type': 'select',
                 'options': talk_types,
