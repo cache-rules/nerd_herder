@@ -13,7 +13,7 @@ class TalkForm extends PureComponent {
     const other = errors.other ? errors.other : '';
 
     return (
-      <Form saving={saving} save={save} cancel={cancel}>
+      <Form saveText="Submit" saving={saving} save={save} cancel={cancel}>
         <div className="field">
           <p>All fields are required.</p>
 
