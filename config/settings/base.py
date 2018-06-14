@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'nerd_herder.talks',
     'nerd_herder.companies',
     'nerd_herder.events',
+    'nerd_herder.slack',
 ]
 
 MIDDLEWARE = [

@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/v1/talks/', include('nerd_herder.talks.urls', namespace='talks')),
     path('api/v1/talk-proposals/',
          include('nerd_herder.talk_proposals.urls', namespace='talk_proposals')),
+    path('api/v1/slack/', include('nerd_herder.slack.urls', namespace='slack')),
 ]
