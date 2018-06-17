@@ -29,7 +29,7 @@ TALK_PROPOSAL = {
 
 @pytest.mark.django_db
 def test_create_talk_proposal(mocker):
-    send_message = mocker.patch("nerd_herder.talk_proposals.views.send_message")
+    send_message = mocker.patch("nerd_herder.talk_proposals.utils.send_message")
     client = Client()
     payload = json.dumps(TALK_PROPOSAL)
     req = client.post(URL, payload, content_type="application/json")
