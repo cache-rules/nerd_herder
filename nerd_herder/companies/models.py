@@ -7,7 +7,7 @@ class Company(UUIDModel, TimeStampedModel):
     name = models.CharField(max_length=128)
 
     class Meta:
-        verbose_name_plural = 'Companies'
+        verbose_name_plural = "Companies"
 
     def __str__(self):
         return self.name
@@ -27,6 +27,7 @@ class Venue(UUIDModel, TimeStampedModel):
     typically mean we will have a primary contact for the venue and a primary contact for the venue
     sponsor.
     """
+
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)

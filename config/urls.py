@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('pages/code-of-conduct/',
-         include('nerd_herder.code_of_conduct.urls', namespace='code_of_conduct')),
-    path('api/v1/talks/', include('nerd_herder.talks.urls', namespace='talks')),
-    path('api/v1/talk-proposals/',
-         include('nerd_herder.talk_proposals.urls', namespace='talk_proposals')),
-    path('api/v1/slack/', include('nerd_herder.slack.urls', namespace='slack')),
+    path("admin/", admin.site.urls),
+    path(
+        "pages/code-of-conduct/",
+        include("nerd_herder.code_of_conduct.urls", namespace="code_of_conduct"),
+    ),
+    path("api/v1/talks/", include("nerd_herder.talks.urls", namespace="talks")),
+    path(
+        "api/v1/talk-proposals/",
+        include("nerd_herder.talk_proposals.urls", namespace="talk_proposals"),
+    ),
+    path("api/v1/slack/", include("nerd_herder.slack.urls", namespace="slack")),
 ]

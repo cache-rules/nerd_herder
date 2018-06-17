@@ -9,68 +9,143 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('talks', '0001_initial'),
-        ('companies', '0001_initial'),
-    ]
+    dependencies = [("talks", "0001_initial"), ("companies", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=128)),
-                ('description', models.TextField(blank=True)),
-                ('date_scheduled', models.DateTimeField(blank=True, null=True)),
-                ('rsvp_max', models.IntegerField()),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                ("name", models.CharField(max_length=128)),
+                ("description", models.TextField(blank=True)),
+                ("date_scheduled", models.DateTimeField(blank=True, null=True)),
+                ("rsvp_max", models.IntegerField()),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.CreateModel(
-            name='Sponsorship',
+            name="Sponsorship",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('description', models.TextField()),
-                ('value', models.FloatField()),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='companies.Company')),
-                ('contact', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='companies.CompanyContact')),
-                ('event', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='events.Event')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                ("description", models.TextField()),
+                ("value", models.FloatField()),
+                (
+                    "company",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="companies.Company"
+                    ),
+                ),
+                (
+                    "contact",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="companies.CompanyContact",
+                    ),
+                ),
+                (
+                    "event",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="events.Event",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TalkInvitation',
+            name="TalkInvitation",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('invited_on', models.DateTimeField(auto_now_add=True)),
-                ('accepted_on', models.DateTimeField(blank=True, null=True)),
-                ('declined_on', models.DateTimeField(blank=True, null=True)),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='events.Event')),
-                ('talk', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='talks.Talk')),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                ("invited_on", models.DateTimeField(auto_now_add=True)),
+                ("accepted_on", models.DateTimeField(blank=True, null=True)),
+                ("declined_on", models.DateTimeField(blank=True, null=True)),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="events.Event"
+                    ),
+                ),
+                (
+                    "talk",
+                    models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to="talks.Talk"),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.CreateModel(
-            name='VenueSponsorship',
+            name="VenueSponsorship",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='companies.Company')),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='events.Event')),
-                ('sponsor_contact', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='venue_sponsorships', to='companies.CompanyContact')),
-                ('venue', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='companies.Venue')),
-                ('venue_contact', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='venue_contacts', to='companies.CompanyContact')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                    ),
+                ),
+                (
+                    "company",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="companies.Company"
+                    ),
+                ),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="events.Event"
+                    ),
+                ),
+                (
+                    "sponsor_contact",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="venue_sponsorships",
+                        to="companies.CompanyContact",
+                    ),
+                ),
+                (
+                    "venue",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="companies.Venue"
+                    ),
+                ),
+                (
+                    "venue_contact",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="venue_contacts",
+                        to="companies.CompanyContact",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='event',
-            name='talks',
-            field=models.ManyToManyField(through='events.TalkInvitation', to='talks.Talk'),
+            model_name="event",
+            name="talks",
+            field=models.ManyToManyField(through="events.TalkInvitation", to="talks.Talk"),
         ),
     ]

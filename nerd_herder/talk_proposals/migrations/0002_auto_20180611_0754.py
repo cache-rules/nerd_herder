@@ -5,14 +5,18 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('talk_proposals', '0001_initial'),
-    ]
+    dependencies = [("talk_proposals", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='talkproposal',
-            name='talk_type',
-            field=models.CharField(choices=[('full_length', 'Full Length (~25 minutes)'), ('lightning', 'Lightning Talk (5-10 minutes)')], max_length=64),
-        ),
+            model_name="talkproposal",
+            name="talk_type",
+            field=models.CharField(
+                choices=[
+                    ("full_length", "Full Length (~25 minutes)"),
+                    ("lightning", "Lightning Talk (5-10 minutes)"),
+                ],
+                max_length=64,
+            ),
+        )
     ]

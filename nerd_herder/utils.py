@@ -8,9 +8,9 @@ from django.conf import settings
 from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
-ASSET_MANIFEST_KEY = 'ASSET_MANIFEST'
-DEFAULT_LOG_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-DEFAULT_DATE_FORMAT = '%Y-%m-%d %H:%M:%S'
+ASSET_MANIFEST_KEY = "ASSET_MANIFEST"
+DEFAULT_LOG_FORMAT = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+DEFAULT_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 def init_logging(log_format=DEFAULT_LOG_FORMAT, date_format=DEFAULT_DATE_FORMAT):
@@ -23,25 +23,25 @@ def init_logging(log_format=DEFAULT_LOG_FORMAT, date_format=DEFAULT_DATE_FORMAT)
 
 
 def get_asset_manifest():
-    logger.info('Retrieving asset manifest')
-    host = getattr(settings, 'ASSET_MANIFEST_HOST')
+    logger.info("Retrieving asset manifest")
+    host = getattr(settings, "ASSET_MANIFEST_HOST")
 
     if host is None:
         # This should only be in dev mode. You will need to manually copy a built css file from
         # the frontend build to nerd_herder/static/main.css
-        return {'main.js': '', 'main.css': 'static/main.css'}
+        return {"main.js": "", "main.css": "static/main.css"}
 
-    url = f'https://{host}/asset-manifest.json'
+    url = f"https://{host}/asset-manifest.json"
 
     try:
         r = requests.get(url, verify=False)
         return r.json()
     except requests.RequestException:
-        logger.error(f'Unable to retrieve asset manifest from {url}')
+        logger.error(f"Unable to retrieve asset manifest from {url}")
     except json.decoder.JSONDecodeError:
-        logger.error(f'Asset manifest URL {url} did not return JSON')
+        logger.error(f"Asset manifest URL {url} did not return JSON")
 
-    return {'main.js': '', 'main.css': ''}
+    return {"main.js": "", "main.css": ""}
 
 
 def get_asset_urls():

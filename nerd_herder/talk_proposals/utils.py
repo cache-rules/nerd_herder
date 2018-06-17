@@ -13,29 +13,21 @@ def get_talk_type_label(value):
 
 
 def talk_proposal_notification(data):
-    title = data['title']
-    name = data['name']
-    talk_type = get_talk_type_label(data['talk_type'])
-    description = data['description']
+    title = data["title"]
+    name = data["name"]
+    talk_type = get_talk_type_label(data["talk_type"])
+    description = data["description"]
     channel = settings.SLACK_TALK_PROPOSAL_CHANNEL
-    text = ':tada: A new talk has been submitted! :tada:'
+    text = ":tada: A new talk has been submitted! :tada:"
     attachment = {
-        'fallback': f'"{title}" has been submitted by {name}',
-        'author_name': name,
-        'title': title,
+        "fallback": f'"{title}" has been submitted by {name}',
+        "author_name": name,
+        "title": title,
         # TODO: Add talk proposal view to frontend and link to it here
         # "title_link": "https://api.slack.com/",
-        'fields': [
-            {
-                'title': 'Talk Type',
-                'value': talk_type,
-                'short': True,
-            },
-            {
-                'title': 'Description',
-                'value': description,
-                'short': False,
-            }
+        "fields": [
+            {"title": "Talk Type", "value": talk_type, "short": True},
+            {"title": "Description", "value": description, "short": False},
         ],
     }
     send_message(channel, text, [attachment])

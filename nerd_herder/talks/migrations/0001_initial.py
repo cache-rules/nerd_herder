@@ -8,24 +8,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('speakers', '0001_initial'),
-    ]
+    dependencies = [("speakers", "0001_initial")]
 
     operations = [
         migrations.CreateModel(
-            name='Talk',
+            name="Talk",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=128)),
-                ('description', models.TextField()),
-                ('talk_type', models.CharField(choices=[('full_length', 'Full Length (25+ minutes)'), ('lightning', 'Lightning Talk (5-10 minutes)')], max_length=64)),
-                ('speakers', models.ManyToManyField(to='speakers.Speaker')),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4, editable=False, primary_key=True, serialize=False
+                    ),
+                ),
+                ("title", models.CharField(max_length=128)),
+                ("description", models.TextField()),
+                (
+                    "talk_type",
+                    models.CharField(
+                        choices=[
+                            ("full_length", "Full Length (25+ minutes)"),
+                            ("lightning", "Lightning Talk (5-10 minutes)"),
+                        ],
+                        max_length=64,
+                    ),
+                ),
+                ("speakers", models.ManyToManyField(to="speakers.Speaker")),
             ],
-            options={
-                'abstract': False,
-            },
-        ),
+            options={"abstract": False},
+        )
     ]

@@ -8,7 +8,7 @@ class AuthenticatedCanGet(BasePermission):
     other forms that have been submitted.
     """
 
-    SAFE_METHODS = ['POST', 'PUT', 'PATCH' 'DELETE', 'HEAD', 'OPTIONS']
+    SAFE_METHODS = ["POST", "PUT", "PATCH" "DELETE", "HEAD", "OPTIONS"]
 
     def has_permission(self, request, view):
         return request.method in self.SAFE_METHODS or request.user.is_authenticated

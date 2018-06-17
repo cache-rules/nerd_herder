@@ -7,8 +7,8 @@ from nerd_herder.speakers.models import Speaker
 class Talk(UUIDModel, TimeStampedModel):
     # In the future we may want to make TALK_TYPES configurable.
     TALK_TYPES = (
-        ('full_length', 'Full Length (25+ minutes)'),
-        ('lightning', 'Lightning Talk (5-10 minutes)')
+        ("full_length", "Full Length (25+ minutes)"),
+        ("lightning", "Lightning Talk (5-10 minutes)"),
     )
 
     title = models.CharField(max_length=128)

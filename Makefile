@@ -39,3 +39,6 @@ logs: cmd:= logs -f
 exec: cmd:= exec $(name) $(c)
 dcps: cmd:= ps
 build push up down start stop restart logs exec dcps: docker_compose
+
+black:
+	black -l 100 .

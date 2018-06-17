@@ -61,9 +61,7 @@ def send_message(channel: str, text: str, attachments: list = None) -> None:
         logger.error(f"Error sending message to slack: {error}")
 
         if error == "channel_not_found":
-            logger.error(
-                f"The slack bot may not have been invited to the channel {channel}"
-            )
+            logger.error(f"The slack bot may not have been invited to the channel {channel}")
 
 
 def send_response(url, text: str, attachments: list = None) -> None:
@@ -80,7 +78,7 @@ def send_response(url, text: str, attachments: list = None) -> None:
     try:
         body = response.json()
     except requests.RequestException:
-        logger.exception('Error sending response')
+        logger.exception("Error sending response")
 
     if body["ok"] is False:
         logger.error("Error responding to slack message")
@@ -98,12 +96,7 @@ def open_submit_talk_dialog(trigger_id) -> None:
         "title": "Submit a talk",
         "callback_id": "submit_talk",
         "elements": [
-            {
-                "label": "Name",
-                "name": "name",
-                "type": "text",
-                "placeholder": "Grace Hopper",
-            },
+            {"label": "Name", "name": "name", "type": "text", "placeholder": "Grace Hopper"},
             {
                 "label": "Email",
                 "name": "email",
@@ -113,18 +106,11 @@ def open_submit_talk_dialog(trigger_id) -> None:
             },
             {"label": "Title", "name": "title", "type": "text"},
             {"label": "Description", "name": "description", "type": "textarea"},
-            {
-                "label": "Duration",
-                "name": "talk_type",
-                "type": "select",
-                "options": talk_types,
-            },
+            {"label": "Duration", "name": "talk_type", "type": "select", "options": talk_types},
         ],
     }
 
-    response = client.api_call(
-        "dialog.open", trigger_id=trigger_id, dialog=json.dumps(dialog)
-    )
+    response = client.api_call("dialog.open", trigger_id=trigger_id, dialog=json.dumps(dialog))
 
     if response["ok"] is False:
         error = response["error"]

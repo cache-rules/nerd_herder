@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class UsersConfig(AppConfig):
-    name = 'nerd_herder.users'
+    name = "nerd_herder.users"

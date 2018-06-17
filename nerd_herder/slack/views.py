@@ -19,9 +19,7 @@ def verify_token(token):
     verification_token = settings.SLACK_VERIFICATION_TOKEN
 
     if verification_token is None:
-        logger.error(
-            "SLACK_VERIFICATION_TOKEN is not set, cannot process incoming webhooks"
-        )
+        logger.error("SLACK_VERIFICATION_TOKEN is not set, cannot process incoming webhooks")
         return False
 
     if verification_token != token:
@@ -54,23 +52,21 @@ def slash_command(request: Request):
         command(data)
     except Exception:
         logger.exception("Error executing slash command from slack")
-        return Response(
-            "An error occurred while trying to process your command", status=500
-        )
+        return Response("An error occurred while trying to process your command", status=500)
 
     return Response()
 
 
 def submit_talk_action(payload):
-    logger.info('Handling talk submitted via slack')
+    logger.info("Handling talk submitted via slack")
     serializer = TalkProposalSerializer(data=payload["submission"])
     serializer.is_valid(raise_exception=True)
     serializer.save()
-    logger.info('Talk proposal saved')
+    logger.info("Talk proposal saved")
     talk_proposal_notification(serializer.data)
-    response_url = payload['response_url']
-    logger.info('Responding to user')
-    send_response(response_url, text='Your talk has been submitted, thank you!')
+    response_url = payload["response_url"]
+    logger.info("Responding to user")
+    send_response(response_url, text="Your talk has been submitted, thank you!")
 
 
 ACTIONS = {"submit_talk": submit_talk_action}

@@ -10,7 +10,7 @@ class Event(UUIDModel, TimeStampedModel):
     description = models.TextField(blank=True)
     date_scheduled = models.DateTimeField(blank=True, null=True)
     rsvp_max = models.IntegerField()
-    talks = models.ManyToManyField(Talk, through='TalkInvitation')
+    talks = models.ManyToManyField(Talk, through="TalkInvitation")
 
     def __str__(self):
         return self.name
@@ -37,7 +37,7 @@ class VenueSponsorship(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='venue_sponsorships'
+        related_name="venue_sponsorships",
     )
 
     # The venue contact is the main contact we have for the venue they're who you contact if you
@@ -47,7 +47,7 @@ class VenueSponsorship(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='venue_contacts'
+        related_name="venue_contacts",
     )
 
 
