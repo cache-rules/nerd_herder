@@ -12,8 +12,8 @@
         to /app/{uri}
     }
 
-    rewrite /favicon {
-        to /app/{uri}
+    proxy /favicon frontend:3000 {
+        transparent
     }
 
     proxy /sockjs-node frontend:3000 {
