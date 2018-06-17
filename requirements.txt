@@ -1,3 +1,4 @@
+black==18.6b2
 Django==2.0.1
 django-redis==4.9.0
 djangorestframework==3.7.7

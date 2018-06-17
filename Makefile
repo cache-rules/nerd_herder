@@ -37,8 +37,6 @@ stop: cmd:= stop $(name)
 restart: cmd:= restart $(name)
 logs: cmd:= logs -f
 exec: cmd:= exec $(name) $(c)
+black: cmd:= exec nerd_herder black -l 100 .
 dcps: cmd:= ps
-build push up down start stop restart logs exec dcps: docker_compose
-
-black:
-	black -l 100 .
+build push up down start stop restart logs exec dcps black: docker_compose
