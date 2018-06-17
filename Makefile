@@ -38,5 +38,6 @@ restart: cmd:= restart $(name)
 logs: cmd:= logs -f
 exec: cmd:= exec $(name) $(c)
 black: cmd:= exec nerd_herder black -l 100 .
+pytest: cmd:= exec nerd_herder pytest .
 dcps: cmd:= ps
-build push up down start stop restart logs exec dcps black: docker_compose
+build push up down start stop restart logs exec dcps black pytest: docker_compose
