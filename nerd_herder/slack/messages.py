@@ -1,6 +1,7 @@
 import json
 import logging
 
+import requests
 from django.conf import settings
 from slackclient import SlackClient
 
@@ -19,7 +20,7 @@ def get_client() -> SlackClient:
     token = settings.SLACK_BOT_USER_TOKEN
 
     if token is None:
-        logger.warning('Unable to send slack message: SLACK_BOT_USER_TOKEN not set.')
+        logger.warning("Unable to send slack message: SLACK_BOT_USER_TOKEN not set.")
         return None
 
     return SlackClient(token)
@@ -47,20 +48,43 @@ def send_message(channel: str, text: str, attachments: list = None) -> None:
     bot_name = settings.SLACK_BOT_NAME
     bot_emoji = settings.SLACK_BOT_EMOJI
     response = client.api_call(
-        'chat.postMessage',
+        "chat.postMessage",
         channel=channel,
         text=text,
         username=bot_name,
-        icon_emoji=f':{bot_emoji}:',
+        icon_emoji=f":{bot_emoji}:",
         attachments=attachments,
     )
 
-    if response['ok'] is False:
-        error = response['error']
-        logger.error(f'Error sending message to slack: {error}')
+    if response["ok"] is False:
+        error = response["error"]
+        logger.error(f"Error sending message to slack: {error}")
 
-        if error == 'channel_not_found':
-            logger.error(f'The slack bot may not have been invited to the channel {channel}')
+        if error == "channel_not_found":
+            logger.error(
+                f"The slack bot may not have been invited to the channel {channel}"
+            )
+
+
+def send_response(url, text: str, attachments: list = None) -> None:
+    payload = {"text": text, "attachments": attachments}
+    token = settings.SLACK_BOT_USER_TOKEN
+
+    if token is None:
+        logger.warning("Unable to send slack message: SLACK_BOT_USER_TOKEN not set.")
+        return None
+
+    headers = {"Authorization": f"Bearer {token}"}
+    response = requests.post(url, json=payload, headers=headers)
+
+    try:
+        body = response.json()
+    except requests.RequestException:
+        logger.exception('Error sending response')
+
+    if body["ok"] is False:
+        logger.error("Error responding to slack message")
+        logger.error(body)
 
 
 def open_submit_talk_dialog(trigger_id) -> None:
@@ -69,45 +93,39 @@ def open_submit_talk_dialog(trigger_id) -> None:
     if client is None:
         return
 
-    talk_types = [{'label': tt[1], 'value': tt[0]} for tt in TalkProposal.TALK_TYPES]
+    talk_types = [{"label": tt[1], "value": tt[0]} for tt in TalkProposal.TALK_TYPES]
     dialog = {
-        'title': 'Submit a talk',
-        'callback_id': 'submit_talk',
-        'elements': [
+        "title": "Submit a talk",
+        "callback_id": "submit_talk",
+        "elements": [
             {
-                'label': 'Name',
-                'name': 'name',
-                'type': 'text',
-                'placeholder': 'Grace Hopper',
+                "label": "Name",
+                "name": "name",
+                "type": "text",
+                "placeholder": "Grace Hopper",
             },
             {
-                'label': 'Email',
-                'name': 'email',
-                'type': 'text',
-                'subtype': 'email',
-                'placeholder': 'you@example.com',
+                "label": "Email",
+                "name": "email",
+                "type": "text",
+                "subtype": "email",
+                "placeholder": "you@example.com",
             },
+            {"label": "Title", "name": "title", "type": "text"},
+            {"label": "Description", "name": "description", "type": "textarea"},
             {
-                'label': 'Title',
-                'name': 'title',
-                'type': 'text',
+                "label": "Duration",
+                "name": "talk_type",
+                "type": "select",
+                "options": talk_types,
             },
-            {
-                'label': 'Description',
-                'name': 'description',
-                'type': 'textarea',
-            },
-            {
-                'label': 'Duration',
-                'name': 'talk_type',
-                'type': 'select',
-                'options': talk_types,
-            },
-        ]
+        ],
     }
 
-    response = client.api_call('dialog.open', trigger_id=trigger_id, dialog=json.dumps(dialog))
+    response = client.api_call(
+        "dialog.open", trigger_id=trigger_id, dialog=json.dumps(dialog)
+    )
 
-    if response['ok'] is False:
-        error = response['error']
-        logger.error(f'Error opening dialog with slack: {error}')
+    if response["ok"] is False:
+        error = response["error"]
+        logger.error(f"Error opening dialog with slack: {error}")
