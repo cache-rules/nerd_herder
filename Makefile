@@ -28,8 +28,9 @@ sls sps slogs: service
 docker_compose:
 	docker-compose -f $(compose_file) $(cmd)
 
-build: cmd := build
-push: cmd := push
+build: cmd := build $(name)
+pull: cmd := pull $(name)
+push: cmd := push $(name)
 up: cmd:= up -d
 down: cmd:= down
 start: cmd:= start $(name)
@@ -40,4 +41,4 @@ exec: cmd:= exec $(name) $(c)
 black: cmd:= exec nerd_herder black -l 100 .
 pytest: cmd:= exec nerd_herder pytest .
 dcps: cmd:= ps
-build push up down start stop restart logs exec dcps black pytest: docker_compose
+build push pull up down start stop restart logs exec dcps black pytest: docker_compose
