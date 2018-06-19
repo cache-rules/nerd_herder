@@ -106,6 +106,7 @@ config/settings/local.py
 caddy.env
 nerd_herder.env
 postgres.env
+slack.*.env
 slack.env
 .docker-data/
 

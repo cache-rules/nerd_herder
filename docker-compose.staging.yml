@@ -27,7 +27,7 @@ services:
         condition: on-failure
     env_file:
       - nerd_herder.staging.env
-      - slack.env
+      - slack.staging.env
     volumes:
       - './nerd_herder/:/usr/src/nerd_herder/nerd_herder/'
       - './config/:/usr/src/nerd_herder/config/'

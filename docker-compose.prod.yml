@@ -27,6 +27,7 @@ services:
         condition: on-failure
     env_file:
       - nerd_herder.env
+      - slack.env
     depends_on:
       - redis
       - postgres
