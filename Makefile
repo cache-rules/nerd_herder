@@ -44,4 +44,4 @@ dcps: cmd:= ps
 build push pull up down start stop restart logs exec dcps black pytest: docker_compose
 
 prod-sync:
-	rsync -rav --files-from=prodfiles.txt . $(APP_SERVER_HOST):~/nerd_herder
+	rsync -rav --files-from=prodfiles.txt . $(username)@pspython.com:~/nerd_herder
