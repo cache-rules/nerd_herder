@@ -1,4 +1,4 @@
-www.{$CADDY_HOST} {
+{$CADDY_HOST} {
     tls {$CADDY_TLS_EMAIL}
     gzip
     root /var/www/nerd_herder
@@ -27,8 +27,4 @@ www.{$CADDY_HOST} {
         transparent
         without /proxy
     }
-}
-
-{$CADDY_HOST} {
-    redir https://www.{$CADDY_HOST}{uri}
 }
