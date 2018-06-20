@@ -1,6 +1,6 @@
-FROM registry.gitlab.com/cache-rules/nerd_herder_ops/frontend:latest as frontend
+FROM registry.gitlab.com/cache-rules/nerd_herder_ops/frontend:0.1 as frontend
 RUN yarn build
-FROM registry.gitlab.com/cache-rules/nerd_herder_ops/nerd_herder:latest as backend
+FROM registry.gitlab.com/cache-rules/nerd_herder_ops/nerd_herder:0.1 as backend
 RUN SECRET_KEY=WORKAROUND_FOR_COLLECTSTATIC python manage.py collectstatic --no-input
 FROM abiosoft/caddy:0.11.0-no-stats
 
