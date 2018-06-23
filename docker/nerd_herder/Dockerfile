@@ -11,6 +11,6 @@ COPY manage.py .
 COPY nerd_herder ./nerd_herder
 COPY wait-for-it.sh .
 EXPOSE 8080
-ENV DJANGO_SETTINGS_MODULE config.settings.docker
+ENV DJANGO_SETTINGS_MODULE config.settings.base
 
 CMD [ "./wait-for-it.sh", "postgres:5432", "--", "gunicorn", "config.wsgi", "-b", "0.0.0.0:8080" ]
