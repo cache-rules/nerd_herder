@@ -41,7 +41,9 @@ exec: cmd:= exec $(name) $(c)
 black: cmd:= exec nerd_herder black -l 100 .
 pytest: cmd:= exec nerd_herder pytest .
 dcps: cmd:= ps
-build push pull up down start stop restart logs exec dcps black pytest: docker_compose
+migrate: cmd:= exec nerd_herder python manage.py migrate
+makemigrations: cmd:= exec nerd_herder python manage.py makemigrations
+build push pull up down start stop restart logs exec dcps black pytest makemigrations migrate: docker_compose
 
 prod-sync:
 	rsync -rav --files-from=prodfiles.txt . $(username)@pspython.com:~/nerd_herder
