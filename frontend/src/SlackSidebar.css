@@ -1,0 +1,28 @@
+.SlackSidebar {
+  display: grid;
+  justify-content: center;
+  font: 62.5%;
+  position: absolute;
+  left: 0;
+  bottom: 10%;
+  width: 10rem;
+  height: 6rem;
+  border: 2px solid darkblue;
+  background-color: lightblue;
+  color: gray;
+}
+
+.SlackSidebar p {
+  text-align: center;
+}
+
+.SlackSidebar a {
+  justify-self: center;
+}
+
+.SlackSidebar img {
+  max-height: 2rem;
+  max-width: 2rem;
+  margin: 0 auto;
+  border-radius: 25%;
+}
