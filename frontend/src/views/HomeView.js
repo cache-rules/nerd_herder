@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import SlackSidebar from '../components/SlackSidebar';
+
 import './HomeView.css';
 
 class HomeView extends PureComponent {
@@ -48,6 +50,9 @@ class HomeView extends PureComponent {
             </div>
           </div>
         </div>
+
+        <SlackSidebar />
+
 
         <div className="hero-foot">
           <div className="container has-text-right">
