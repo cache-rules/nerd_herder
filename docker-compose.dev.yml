@@ -4,27 +4,15 @@ services:
     image: postgres:latest
     env_file:
       - postgres.dev.env
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
     volumes:
       - './.docker-data/postgresql/data:/var/lib/postgresql/data/'
   redis:
     image: 'redis:alpine'
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
   nerd_herder:
     build:
       context: .
       dockerfile: docker/nerd_herder/Dockerfile
     image: registry.gitlab.com/cache-rules/nerd_herder_ops/nerd_herder:latest
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
     command:
       - './wait-for-it.sh'
       - 'postgres:5432'
@@ -50,23 +38,18 @@ services:
       context: .
       dockerfile: docker/frontend/Dockerfile
     image: registry.gitlab.com/cache-rules/nerd_herder_ops/frontend:latest
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
     command:
       - 'yarn'
       - 'start'
     volumes:
-        - './frontend/:/usr/src/nerd_herder/frontend/'
+        - './frontend/public/:/usr/src/nerd_herder/frontend/public'
+        - './frontend/src/:/usr/src/nerd_herder/frontend/src'
+        - './frontend/package.json:/usr/src/nerd_herder/frontend/package.json'
+        - './frontend/yarn.lock:/usr/src/nerd_herder/frontend/yarn.lock'
   reverse_proxy:
     image: abiosoft/caddy:0.11.0-no-stats
     environment:
       - ACME_AGREE=true
-    deploy:
-      replicas: 1
-      restart_policy:
-        condition: on-failure
     depends_on:
       - nerd_herder
       - frontend
