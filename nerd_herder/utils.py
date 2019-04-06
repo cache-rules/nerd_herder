@@ -51,4 +51,4 @@ def get_asset_urls():
         manifest = get_asset_manifest()
         cache.set(ASSET_MANIFEST_KEY, manifest, 60)
 
-    return f'/{manifest["main.js"]}', f'/{manifest["main.css"]}'
+    return f'{manifest["main.js"]}', f'{manifest["main.css"]}'
