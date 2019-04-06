@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
-import SlackSidebar from '../components/SlackSidebar';
 
 import './HomeView.css';
 
@@ -16,6 +15,19 @@ class HomeView extends PureComponent {
                   <div className="home-link-item">
                     <i className="fab fa-meetup fa-4x" />
                     <span className="home-link-item__label">Upcoming events</span>
+                  </div>
+                </a>
+              </div>
+
+              <div className="level-item has-text-centered">
+                <div className="vertical-line" />
+              </div>
+
+              <div className="level-item has-text-centered">
+                <a href="http://slack.pspython.com">
+                  <div className="home-link-item">
+                    <i className="fab fa-slack fa-4x" />
+                    <span className="home-link-item__label">Slack</span>
                   </div>
                 </a>
               </div>
@@ -48,8 +60,6 @@ class HomeView extends PureComponent {
             </div>
           </div>
         </div>
-
-        <SlackSidebar />
 
         <div className="hero-foot">
           <div className="container has-text-right">
