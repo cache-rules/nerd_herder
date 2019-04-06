@@ -8,7 +8,6 @@ class NewSponsorForm extends Component {
         <div className="field">
           <p>All fields are required.</p>
         </div>
-
         TODO
       </Form>
     );

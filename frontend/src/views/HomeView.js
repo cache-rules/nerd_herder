@@ -21,8 +21,7 @@ class HomeView extends PureComponent {
               </div>
 
               <div className="level-item has-text-centered">
-                <div className="vertical-line">
-                </div>
+                <div className="vertical-line" />
               </div>
 
               <div className="level-item has-text-centered">
@@ -35,8 +34,7 @@ class HomeView extends PureComponent {
               </div>
 
               <div className="level-item has-text-centered">
-                <div className="vertical-line">
-                </div>
+                <div className="vertical-line" />
               </div>
 
               <div className="level-item has-text-centered">
@@ -53,14 +51,13 @@ class HomeView extends PureComponent {
 
         <SlackSidebar />
 
-
         <div className="hero-foot">
           <div className="container has-text-right">
-              <div className="powered-by">
-                <span className="fab fa-github" />&nbsp;
-                Powered by&nbsp;
-                <a href="https://github.com/cache-rules/nerd_herder">nerd_herder</a>
-              </div>
+            <div className="powered-by">
+              <span className="fab fa-github" />
+              &nbsp; Powered by&nbsp;
+              <a href="https://github.com/cache-rules/nerd_herder">nerd_herder</a>
+            </div>
           </div>
         </div>
       </section>

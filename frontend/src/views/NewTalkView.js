@@ -87,9 +87,7 @@ class NewTalkView extends Component {
       body = await response.json();
     } catch (e) {
       body = {
-        other: [
-          'Unexpected error returned from server. Please try again later.'
-        ]
+        other: ['Unexpected error returned from server. Please try again later.'],
       };
     }
 
@@ -110,7 +108,7 @@ class NewTalkView extends Component {
         },
       }));
 
-      this.props.history.push('/speak/success')
+      this.props.history.push('/speak/success');
     }
   }
 
