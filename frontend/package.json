@@ -10,17 +10,23 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.4"
+    "react-scripts": "2.1.8"
   },
   "devDependencies": {
-    "prettier": "^1.12.1"
+    "prettier": "1.16.4"
   },
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
     "trailingComma": "es5"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
