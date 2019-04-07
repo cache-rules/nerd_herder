@@ -21,7 +21,7 @@
         websocket
     }
 
-    proxy /static/js/bundle frontend:3000 {
+    proxy /static/js/ frontend:3000 {
         transparent
     }
 
