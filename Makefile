@@ -43,7 +43,8 @@ pytest: cmd:= exec nerd_herder pytest .
 dcps: cmd:= ps
 migrate: cmd:= exec nerd_herder python manage.py migrate
 makemigrations: cmd:= exec nerd_herder python manage.py makemigrations
-build push pull up down start stop restart logs exec dcps black pytest makemigrations migrate: docker_compose
+pg_dump: cmd:= exec postgres pg_dump -c -U nerd_herder -d nerd_herder
+build push pull up down start stop restart logs exec dcps black pytest makemigrations migrate pg_dump: docker_compose
 
 prod-sync:
 	rsync -rav --files-from=prodfiles.txt . $(username)@pspython.com:~/nerd_herder
