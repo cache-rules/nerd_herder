@@ -47,4 +47,4 @@ pg_dump: cmd:= exec postgres pg_dump -c -U nerd_herder -d nerd_herder
 build push pull up down start stop restart logs exec dcps black pytest makemigrations migrate pg_dump: docker_compose
 
 prod-sync:
-	rsync -rav --files-from=prodfiles.txt . $(username)@pspython.com:~/nerd_herder
+	rsync -rav --files-from=prodfiles.txt . pspython:~/nerd_herder
