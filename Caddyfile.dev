@@ -8,7 +8,7 @@
     }
 
     rewrite {
-        r '~*.hot-update.json'
+        r '~*.hot-update.js'
         to /app/{uri}
     }
 
