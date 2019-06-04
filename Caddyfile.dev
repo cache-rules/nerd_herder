@@ -12,6 +12,10 @@
         to /app/{uri}
     }
 
+    proxy /manifest frontend:3000 {
+        transparent
+    }
+
     proxy /favicon frontend:3000 {
         transparent
     }
