@@ -1,7 +1,7 @@
 black==18.6b2
 Django==2.2
 django-redis==4.10.0
-djangorestframework==3.7.7
+djangorestframework==3.9.1
 gunicorn==19.8.1
 psycopg2-binary==2.7.4
 pytest==3.3.2
