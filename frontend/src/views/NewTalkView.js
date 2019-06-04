@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
 import { post } from '../api/http';
 import TalkForm from '../components/TalkForm';
+import { withAudienceChoices } from '../api/AudienceChoice';
+
+function trimToNull(value) {
+  const trimmedValue = value.trim();
+
+  if (trimmedValue === '') {
+    return null;
+  }
+
+  return trimmedValue;
+}
+
+function noop() {
+  return null;
+}
+
+function required(value) {
+  if (value === null || value.trim() === '') {
+      return 'This field is required.';
+  }
+
+  return null;
+}
 
 const defaultTalk = {
   email: '',
@@ -8,6 +31,7 @@ const defaultTalk = {
   title: '',
   description: '',
   talkType: '',
+  audience: '',
 };
 
 const defaultErrors = {
@@ -16,6 +40,16 @@ const defaultErrors = {
   title: null,
   description: null,
   talkType: null,
+  audience: null,
+};
+
+const validators = {
+  name: required,
+  email: required,
+  title: required,
+  description: required,
+  talkType: required,
+  audience: noop,
 };
 
 class NewTalkView extends Component {
@@ -47,16 +81,17 @@ class NewTalkView extends Component {
   }
 
   validate() {
-    const { name, email, title, description, talkType } = this.state.talk;
+    const { name, email, title, description, talkType, audience } = this.state.talk;
     let valid = true;
 
     const errors = Object.keys(defaultErrors).reduce(
       (errors, field) => {
-        const value = this.state.talk[field].trim();
+        const value = this.state.talk[field];
+        const error = validators[field](value);
 
-        if (value === '') {
+        if (error !== null) {
           valid = false;
-          errors[field] = 'This field is required.';
+          errors[field] = error;
         }
 
         return errors;
@@ -74,6 +109,7 @@ class NewTalkView extends Component {
       title,
       description,
       talk_type: talkType,
+      audience: trimToNull(audience),
     };
   }
 
@@ -92,6 +128,7 @@ class NewTalkView extends Component {
     }
 
     if (response.status >= 400) {
+      console.log(body);
       const errors = Object.keys(body).reduce(
         (errors, attr) => {
           errors[attr] = body[attr].join(' ');
@@ -147,6 +184,7 @@ class NewTalkView extends Component {
                 saving={this.state.saving}
                 talk={this.state.talk}
                 errors={this.state.errors}
+                audienceChoices={this.props.audienceChoices}
                 updateValue={this.updateTalkValue}
                 save={this.onSave}
                 cancel={this.onCancel}
@@ -159,4 +197,4 @@ class NewTalkView extends Component {
   }
 }
 
-export default NewTalkView;
+export default withAudienceChoices(NewTalkView);

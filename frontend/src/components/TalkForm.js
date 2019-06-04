@@ -9,7 +9,7 @@ const TALK_TYPE_CHOICES = [
 
 class TalkForm extends PureComponent {
   render() {
-    const { saving, talk, errors, updateValue, save, cancel } = this.props;
+    const { saving, talk, errors, updateValue, save, cancel, audienceChoices } = this.props;
     const other = errors.other ? errors.other : '';
 
     return (
@@ -63,6 +63,16 @@ class TalkForm extends PureComponent {
           value={talk.talkType}
           error={errors.talkType}
           options={TALK_TYPE_CHOICES}
+          onChange={updateValue}
+        />
+
+        <Input
+          type="select"
+          name="audience"
+          label="Intended Audience"
+          value={talk.audience}
+          error={errors.audience}
+          options={audienceChoices.options}
           onChange={updateValue}
         />
       </Form>
