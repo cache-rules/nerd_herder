@@ -3,6 +3,10 @@ import { post } from '../api/http';
 import TalkForm from '../components/TalkForm';
 import { withAudienceChoices } from '../api/AudienceChoice';
 
+const UNEXPECTED_RESPONSE = {
+  other: ['Unexpected error returned from server. Please try again later.'],
+};
+
 function trimToNull(value) {
   const trimmedValue = value.trim();
 
@@ -122,14 +126,19 @@ class NewTalkView extends Component {
     try {
       body = await response.json();
     } catch (e) {
-      body = {
-        other: ['Unexpected error returned from server. Please try again later.'],
-      };
+      body = UNEXPECTED_RESPONSE;
+    }
+
+    if (response.status > 400 && body.hasOwnProperty('detail')) {
+      // This is very likely a response we don't want or need to expose to the user.
+      // typically this is a 403 due to no CSRF or something similar.
+      body = UNEXPECTED_RESPONSE;
     }
 
     if (response.status >= 400) {
-      console.log(body);
-      const errors = Object.keys(body).reduce(
+      let errors;
+
+      errors = Object.keys(body).reduce(
         (errors, attr) => {
           errors[attr] = body[attr].join(' ');
           return errors;
