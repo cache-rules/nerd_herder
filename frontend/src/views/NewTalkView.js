@@ -174,12 +174,10 @@ class NewTalkView extends Component {
     return (
       <section className="main section">
         <div className="container">
-          <h1 className="title">Submit a Talk</h1>
-        </div>
-
-        <div className="container">
           <div className="columns">
             <div className="column is-half">
+              <h1 className="title">Submit a Talk</h1>
+
               <TalkForm
                 saving={this.state.saving}
                 talk={this.state.talk}
