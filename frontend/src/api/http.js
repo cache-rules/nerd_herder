@@ -1,7 +1,25 @@
+function getCookie(name) {
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.startsWith(name + '=')){
+          return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+      }
+    }
+
+  return null;
+}
+
+const csrftoken = getCookie('csrftoken');
 const esc = encodeURIComponent;
 
 const defaultHeaders = {
   'content-type': 'application/json',
+  'X-CSRFToken': csrftoken,
 };
 
 export function addDefaultHeader(key, value) {
