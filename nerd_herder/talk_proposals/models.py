@@ -6,6 +6,9 @@ from nerd_herder.models import UUIDModel, TimeStampedModel
 class AudienceChoice(UUIDModel, TimeStampedModel):
     label = models.CharField(max_length=128)
 
+    def __str__(self):
+        return self.label
+
 
 class TalkProposal(UUIDModel, TimeStampedModel):
     # In the future we may want to make TALK_TYPES configurable.

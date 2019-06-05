@@ -11,7 +11,7 @@ class AudienceChoiceModelAdmin(admin.ModelAdmin):
 
 class TalkProposalModelAdmin(admin.ModelAdmin):
     model = TalkProposal
-    list_display = ("title", "created", "name", "email", "talk_type", "description")
+    list_display = ("title", "created", "name", "email", "talk_type", "audience", "description")
     ordering = ("-created", )
 
 
