@@ -84,88 +84,89 @@ export class BoolInput extends PureComponent {
 }
 
 export class Input extends PureComponent {
-  render() {
-    const props = this.props;
-    const id = props.name;
-    const type = props.type;
-    const onChange = e => {
-      let { name, value } = e.target;
+  onChange = (e) => {
+    const { type, onChange } = this.props;
+    const name = e.target.name;
+    let value = e.target.value;
 
       if (type === 'bool') {
         value = value === 'true';
       }
 
-      props.onChange({ [name]: value });
-    };
+      onChange({ [name]: value });
+  };
+
+  render() {
+    const { type, name, label, value, error, disabled, choices, options, required } = this.props;
     let input = null;
     let errorClass = '';
 
-    if (props.error) {
+    if (error) {
       errorClass = 'is-danger';
     }
 
     if (type === 'textarea') {
       input = (
         <textarea
-          id={id}
+          id={name}
           className={`textarea ${errorClass}`}
-          name={props.name}
-          value={props.value}
-          disabled={props.disabled}
-          onChange={onChange}
+          name={name}
+          value={value}
+          disabled={disabled}
+          onChange={this.onChange}
         />
       );
     } else if (type === 'bool') {
       input = (
         <BoolInput
-          name={props.name}
-          value={props.value}
-          error={props.error}
-          disabled={props.disabled}
-          onChange={onChange}
+          name={name}
+          value={value}
+          error={error}
+          disabled={disabled}
+          onChange={this.onChange}
         />
       );
     } else if (type === 'radio-group') {
       input = (
         <RadioGroup
-          name={props.name}
-          value={props.value}
-          error={props.error}
-          choices={props.choices}
-          disabled={props.disabled}
-          onChange={onChange}
+          name={name}
+          value={value}
+          error={error}
+          choices={choices}
+          disabled={disabled}
+          onChange={this.onChange}
         />
       );
     } else if (type === 'select') {
       input = (
         <Select
-          id={id}
-          name={props.name}
-          value={props.value}
-          options={props.options}
-          error={props.error}
-          disabled={props.disabled}
-          onChange={onChange}
+          id={name}
+          name={name}
+          value={value}
+          options={options}
+          error={error}
+          disabled={disabled}
+          onChange={this.onChange}
         />
       );
     } else {
       input = (
         <input
-          id={id}
+          id={name}
           className={`input ${errorClass}`}
-          name={props.name}
-          type={props.type}
-          value={props.value}
-          disabled={props.disabled}
-          onChange={onChange}
+          name={name}
+          type={type}
+          value={value}
+          disabled={disabled}
+          onChange={this.onChange}
         />
       );
     }
 
     return (
       <div className="field">
-        <label htmlFor={id} className="label">
-          {props.label}
+        <label htmlFor={name} className="label">
+          {label}{required ? '*' : ''}
         </label>
 
         <div className="control">{input}</div>

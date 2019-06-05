@@ -3,7 +3,7 @@ import { Form, Input } from './Form';
 
 const TALK_TYPE_CHOICES = [
   { value: '', label: 'Select a type' },
-  { value: 'lightning', label: 'Lightning (5-10 minutes)' },
+  { value: 'lightning', label: 'Lightning (5 minutes)' },
   { value: 'full_length', label: 'Full Length (~25 minutes)' },
 ];
 
@@ -15,12 +15,13 @@ class TalkForm extends PureComponent {
     return (
       <Form saveText="Submit" saving={saving} save={save} cancel={cancel}>
         <div className="field">
-          <p>All fields are required.</p>
+          <p>Fields marked with * are required.</p>
 
           <p className="has-text-danger">{other}</p>
         </div>
 
         <Input
+          required
           type="text"
           name="name"
           label="Name"
@@ -30,6 +31,7 @@ class TalkForm extends PureComponent {
         />
 
         <Input
+          required
           type="text"
           name="email"
           label="Email"
@@ -39,6 +41,7 @@ class TalkForm extends PureComponent {
         />
 
         <Input
+          required
           type="text"
           name="title"
           label="Title"
@@ -48,6 +51,7 @@ class TalkForm extends PureComponent {
         />
 
         <Input
+          required
           type="textarea"
           name="description"
           label="Description"
@@ -57,6 +61,7 @@ class TalkForm extends PureComponent {
         />
 
         <Input
+          required
           type="select"
           name="talkType"
           label="Duration"
