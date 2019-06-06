@@ -45,7 +45,10 @@ services:
     build:
       context: .
       dockerfile: docker/reverse_proxy/Dockerfile
-    image: registry.gitlab.com/cache-rules/nerd_herder_ops/reverse_proxy:0.10
+      args:
+        FRONTEND_IMAGE: registry.gitlab.com/cache-rules/nerd_herder_ops/frontend:0.6
+        BACKEND_IMAGE: registry.gitlab.com/cache-rules/nerd_herder_ops/nerd_herder:0.8
+    image: registry.gitlab.com/cache-rules/nerd_herder_ops/reverse_proxy:0.11
     deploy:
       replicas: 1
       restart_policy:
