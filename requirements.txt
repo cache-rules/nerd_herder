@@ -1,5 +1,5 @@
 black==18.6b2
-Django==2.2.8
+Django==2.2.21
 django-redis==4.10.0
 djangorestframework==3.9.1
 gunicorn==19.8.1
